@@ -4,6 +4,7 @@ import {
     DrawerItem,
     DrawerContentScrollView,
 } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import {
     useTheme,
     Avatar,
@@ -17,12 +18,28 @@ import {
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const DrawerNav = createDrawerNavigator();
+function HomeScreen() {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
+            <Text>Home Screen</Text>
+        </View>
+    );
+}
+export const RootNavigator = () => {
+        return (
+            <DrawerNav.Navigator drawerContent={() => <DrawerContent />}>
+                <DrawerNav.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+            </DrawerNav.Navigator>
+    );
+};
+
 
 
 // components
-const DrawerNav = createDrawerNavigator();
+
 
 // function DrawerContent() {
 //     return (
@@ -31,21 +48,6 @@ const DrawerNav = createDrawerNavigator();
 //         </View>
 //     )
 // }
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
-        <Text>Home Screen</Text>
-        </View>
-    );
-}
-
-export const RootNavigator = () => {
-    return (
-        <DrawerNav.Navigator drawerContent={() => <DrawerContent />}>
-        <DrawerNav.Screen name="Home" component={HomeScreen} />
-        </DrawerNav.Navigator>
-    );
-};
 
 
 export function DrawerContent(props) {

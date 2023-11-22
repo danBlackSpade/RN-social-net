@@ -10,14 +10,15 @@ import { name as appName } from './app.json';
 
 import { RootNavigator } from './screens/Drawer';
 // components
-
+import { FeedStack } from './screens/FeedStack';
 
 
 export default function App() {
   return (
     <PaperProvider>
-      <NavigationContainer>
+      <NavigationContainer >
         <RootNavigator />
+        {/* <FeedStack /> */}
       </NavigationContainer>
     </PaperProvider>
   );
