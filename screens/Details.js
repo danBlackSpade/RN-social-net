@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Text } from 'react-native'
+import { PostDetails } from '../components/PostDetails';
 
-export const Details = () => {
+export const Details = (props) => {
     return (
-        <Text>Details</Text>
+        <PostDetails {...props.route.params}/>
     )
-}
+};

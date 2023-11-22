@@ -100,7 +100,7 @@ export const StackNavigator = () => {
             }}
             name="Details"
             component={Details}
-            options={{ headerTitle: 'Tweet' }}
+            options={{ headerTitle: 'Post' }}
         />
         </Stack.Navigator>
     )
