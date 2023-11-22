@@ -48,11 +48,12 @@ return (
     <React.Fragment>
         
     <Tab.Navigator
+    barStyle={{ backgroundColor: theme.colors.background }}
         initialRouteName="Feed"
         backBehavior="initialRoute"
         shifting={true}
-        activeColor={theme.colors.primary}
-        inactiveColor={color(theme.colors.text)
+        activeColor={theme.colors.outline}
+        inactiveColor={color(theme.colors.onSurface)
         .alpha(0.6)
         .rgb()
         .string()}

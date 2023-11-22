@@ -26,7 +26,7 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={MD3DarkTheme}>
+    <PaperProvider theme={MD3LightTheme}>
       <NavigationContainer initialRouteName='FeedStack' component={StackNavigator} >
         <RootNavigator> 
           <StackNavigator />
