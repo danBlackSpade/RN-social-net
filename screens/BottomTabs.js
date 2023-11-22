@@ -2,11 +2,10 @@ import React from 'react';
 import color from 'color';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useTheme, Portal, FAB } from 'react-native-paper';
-import { useSafeArea } from 'react-native-safe-area-context';
 import { useIsFocused, RouteProp } from '@react-navigation/native';
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
 
-import overlay from '../utils/Overlay';
+import Overlay from '../utils/Overlay';
 import { Feed } from './Feed';
 import { Details } from './Details';
 // import { Message } from './Message';
@@ -25,7 +24,6 @@ const routeName = props.route.state
     : 'Feed';
 
 const theme = useTheme();
-const safeArea = useSafeArea();
 const isFocused = useIsFocused();
 
 let icon = 'feather';
@@ -40,7 +38,7 @@ switch (routeName) {
 }
 
 const tabBarColor = theme.dark
-    ? (overlay(6, theme.colors.surface))
+    ? (Overlay(6, theme.colors.surface))
     : theme.colors.surface;
 
 return (

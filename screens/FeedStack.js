@@ -41,6 +41,7 @@ const Header = ({ scene, previous, navigation }) => {
             </TouchableOpacity>
             )}
             <Appbar.Content
+
             title={
                 previous ? title : <MaterialCommunityIcons name="twitter" size={40} />
             }

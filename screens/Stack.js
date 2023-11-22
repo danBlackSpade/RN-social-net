@@ -21,11 +21,12 @@ export const StackNavigator = () => {
 
     return (
         <Stack.Navigator
+            
             initialRouteName='FeedList'
             // headerMode='screen'
             
             screenOptions={{
-                headerStyle: { backgroundColor: 'tomato' },
+                headerStyle: { backgroundColor: 'black' },
                 headerMode: 'screen',
                 header: ({ navigation, route, options, back }) => {
                     
@@ -33,6 +34,7 @@ export const StackNavigator = () => {
 
                     return (
                         <Appbar.Header
+                        mode="center-aligned"
                         theme={{ colors: { primary: theme.colors.surface } }}
                         >
                         {back ? (
@@ -82,13 +84,20 @@ export const StackNavigator = () => {
         >
         <Stack.Screen
             name="FeedList"
+            screenOptions={{headerTitleAlign:'center'}}
+            
             component={BottomTabs}
             options={({ route }) => {
-            const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-            return { headerTitle: routeName };
+                const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+                return { headerTitle: routeName };
             }}
+
         />
         <Stack.Screen
+            headerTitleStyle={{ 
+                textAlign:"center", 
+                flex:1 
+            }}
             name="Details"
             component={Details}
             options={{ headerTitle: 'Tweet' }}
