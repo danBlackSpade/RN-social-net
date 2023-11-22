@@ -7,6 +7,7 @@ import {
     Avatar,
     Subheading,
     useTheme,
+    Text
 } from 'react-native-paper';
 import color from 'color';
 
@@ -14,12 +15,12 @@ import color from 'color';
 export const PostDetails = (props) => {
     const theme = useTheme();
 
-    const contentColor = color(theme.colors.text)
+    const contentColor = color(theme.colors.onSurface)
         .alpha(0.8)
         .rgb()
         .string();
     
-    const imageBorderColor = color(theme.colors.text)
+    const imageBorderColor = color(theme.colors.onSurface)
         .alpha(0.15)
         .rgb()
         .string();
@@ -37,9 +38,9 @@ export const PostDetails = (props) => {
                     <Caption style={styles.handle}>{props.handle}</Caption>
                 </View>
             </View>
-            <Subheading style={[styles.content, { color: contentColor }]}>
+            <Text style={[styles.content, { color: contentColor }]}>
                 {props.content}
-            </Subheading>
+            </Text>
             <Image 
                 source={{ uri: props.image }}
                 style={[
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
         fontSize: 20,
         lineHeight: 30,
+
     },
     image: {
         borderWidth: StyleSheet.hairlineWidth,

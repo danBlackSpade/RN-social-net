@@ -34,8 +34,8 @@ export const StackNavigator = () => {
 
                     return (
                         <Appbar.Header
-                        mode="center-aligned"
-                        theme={{ colors: { primary: theme.colors.surface } }}
+                            mode='center-aligned'
+                            theme={{ colors: { primary: theme.colors.surface } }}
                         >
                         {back ? (
                             <Appbar.BackAction
@@ -49,13 +49,19 @@ export const StackNavigator = () => {
                                 ((navigation)).openDrawer();
                             }}
                             >
-                            <Avatar.Image
+                            <MaterialCommunityIcons 
+                                // style={}
+                                name='menu'
+                                size={40}
+                                color={theme.colors.primary}
+                            />
+                            {/* <Avatar.Image
                                 size={40}
                                 source={{
                                 uri:
                                     'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
                                 }}
-                            />
+                            /> */}
                             </TouchableOpacity>
                         )}
                         <Appbar.Content

@@ -2,23 +2,34 @@ import 'react-native-gesture-handler';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 
-import { PaperProvider } from 'react-native-paper';
+import { MD3LightTheme, PaperProvider, MD3DarkTheme as MD3DarkTheme, useTheme } from 'react-native-paper';
 import { AppRegistry } from 'react-native';
 import { name as appName } from './app.json';
 
 import { RootNavigator } from './screens/Drawer';
 // components
-import { FeedStack } from './screens/FeedStack';
+import { StackNavigator } from './screens/Stack';
 
+const theme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    // primary: 'red',
+    // secondary: 'red',
+    // brandPrimary: '#fefefe',
+    // brandSecondary: 'red',
+  }
+}
+// export const appTheme = () => useTheme();
 
 export default function App() {
   return (
-    <PaperProvider>
-      <NavigationContainer initialRouteName='FeedStack' component={FeedStack} >
+    <PaperProvider theme={MD3DarkTheme}>
+      <NavigationContainer initialRouteName='FeedStack' component={StackNavigator} >
         <RootNavigator> 
-          <FeedStack />
+          <StackNavigator />
         </ RootNavigator>
       </NavigationContainer>
     </PaperProvider>

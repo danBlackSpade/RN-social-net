@@ -29,17 +29,17 @@ import {
     export const Post = (props) => {
     const theme = useTheme();
 
-    const iconColor = color(theme.colors.text)
+    const iconColor = color(theme.colors.onSurface)
         .alpha(0.54)
         .rgb()
         .string();
 
-    const contentColor = color(theme.colors.text)
+    const contentColor = color(theme.colors.onSurface)
         .alpha(0.8)
         .rgb()
         .string();
 
-    const imageBorderColor = color(theme.colors.text)
+    const imageBorderColor = color(theme.colors.onSurface)
         .alpha(0.15)
         .rgb()
         .string();

@@ -11,6 +11,7 @@ import { Details } from './Details';
 // import { Message } from './Message';
 // import { Notifications } from './notifications';
 // import { StackNavigatorParamlist } from './types';
+import { appTheme } from '../App';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,6 +25,7 @@ const routeName = props.route.state
     : 'Feed';
 
 const theme = useTheme();
+
 const isFocused = useIsFocused();
 
 let icon = 'feather';
@@ -93,14 +95,15 @@ return (
                 bottom: 95,
                 right: 16,
             }}
-            color="white"
+            color="black"
             theme={{
                 colors: {
-                accent: theme.colors.primary,
+                    // accent: theme.colors.primary,
                 },
             }}
-            onPress={() => {alert('hi')}}
+            onPress={() => {alert(theme.colors.background)}}
             />
+            {/* <Text>{theme.colors.primary}</Text> */}
         </ SafeAreaView>
     </Portal>
     
