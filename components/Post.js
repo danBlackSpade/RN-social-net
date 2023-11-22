@@ -46,7 +46,7 @@ import {
 
     return (
         <TouchableRipple onPress={() => props.onPress(props.id)}>
-        <Surface style={styles.container}>
+        <Surface style={styles.container} elevation={1}>
             <View style={styles.leftColumn}>
             <Avatar.Image source={{ uri: props.avatar }} size={60} />
             </View>

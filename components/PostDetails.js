@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import {
     Surface,
     Title,
@@ -26,7 +26,8 @@ export const PostDetails = (props) => {
         .string();
 
     return (
-        <Surface style={styles.container}>
+        <ScrollView>
+        <Surface style={styles.container} elevation={2}>
             <View style={styles.topRow}>
                 <Avatar.Image 
                     style={styles.avatar}
@@ -51,6 +52,7 @@ export const PostDetails = (props) => {
                 ]}
             />
         </Surface>
+        </ScrollView>
     )
 }
 
