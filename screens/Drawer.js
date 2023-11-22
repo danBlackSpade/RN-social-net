@@ -19,6 +19,8 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { StackNavigator } from './Stack';
+
 
 const DrawerNav = createDrawerNavigator();
 function HomeScreen() {
@@ -31,7 +33,7 @@ function HomeScreen() {
 export const RootNavigator = () => {
         return (
             <DrawerNav.Navigator drawerContent={() => <DrawerContent />}>
-                <DrawerNav.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+                <DrawerNav.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
             </DrawerNav.Navigator>
     );
 };

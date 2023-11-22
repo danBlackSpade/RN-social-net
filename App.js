@@ -16,9 +16,10 @@ import { FeedStack } from './screens/FeedStack';
 export default function App() {
   return (
     <PaperProvider>
-      <NavigationContainer >
-        <RootNavigator />
-        {/* <FeedStack /> */}
+      <NavigationContainer initialRouteName='FeedStack' component={FeedStack} >
+        <RootNavigator> 
+          <FeedStack />
+        </ RootNavigator>
       </NavigationContainer>
     </PaperProvider>
   );
