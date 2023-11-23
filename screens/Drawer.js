@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 import {
     DrawerItem,
     DrawerContentScrollView,
@@ -20,23 +20,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StackNavigator } from './Stack';
+import { PreferencesContext } from '../contexts/preferencesContext';
 
 
-const DrawerNav = createDrawerNavigator();
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
-            <Text>Home Screen</Text>
-        </View>
-    );
-}
-export const RootNavigator = () => {
-        return (
-            <DrawerNav.Navigator drawerContent={() => <DrawerContent />}>
-                <DrawerNav.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
-            </DrawerNav.Navigator>
-    );
-};
+
+
 
 
 
@@ -51,12 +39,28 @@ export const RootNavigator = () => {
 //     )
 // }
 
-
+// const fadeAnim = React.useRef(new Animated.Value(0)).current;
 export function DrawerContent(props) {
+    const paperTheme = useTheme();
+    const { rtl, theme, toggleTheme, toggleRTL } = React.useContext(
+        PreferencesContext
+    );
+
+    // const translateX = new Animated.interpolateNode(props.progress, {
+    //     inputRange: [0, 0.5, 0.7, 0.8, 1],
+    //     outputRange: [-100, -85, -70, -45, 0],
+    // });
     return (
-        <DrawerContentScrollView {...props} >
+        <DrawerContentScrollView {...props}  style={{flex: 1, backgroundColor: paperTheme.colors.surfaceVariant}} >
             <View
-                style={styles.drawerContent}
+
+                // style={[
+                //     styles.drawerContent,
+                //     {
+                //         backgroundColor: paperTheme.colors.surface,
+                //         transform: [{ translateX }],
+                //     },
+                //     ]}
             >
                 <View style={styles.userInfoSection}>
                     <Avatar.Image 
@@ -87,44 +91,47 @@ export function DrawerContent(props) {
                         icon={({ color, size }) => (
                         <MaterialCommunityIcons
                             name="account-outline"
-                            color={color}
+                            color={paperTheme.colors.secondary}
                             size={size}
                         />
                         )}
-                        label="Profile"
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
                         onPress={() => {}}
                     />
-                    <DrawerItem
+                    {/* <DrawerItem
                         icon={({ color, size }) => (
-                        <MaterialCommunityIcons name="tune" color={color} size={size} />
+                        <MaterialCommunityIcons name="tune" color={paperTheme.colors.secondary} size={size} />
                         )}
-                        label="Preferences"
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Preferences</Text>)}
                         onPress={() => {}}
-                    />
+                    /> */}
                     <DrawerItem
                         icon={({ color, size }) => (
                         <MaterialCommunityIcons
                             name="bookmark-outline"
-                            color={color}
+                            color={paperTheme.colors.secondary}
                             size={size}
                         />
                         )}
-                        label="Friends"
+                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}> Friends?</Text>) }
                         onPress={() => {}}
                     />
-                    </Drawer.Section>
-                    <Drawer.Section title="Menu 2">
-                    <TouchableRipple onPress={() => {}}>
+                    </Drawer.Section >
+                    <Drawer.Section  style={styles.preferences}>
+                    <Title style={styles.preferences}>Preferences</Title>
+                    
+                    <TouchableRipple onPress={toggleTheme}>
                         <View style={styles.preference}>
                         <Text>Dark Theme</Text>
                         <View pointerEvents="none">
-                            <Switch value={false} />
+                            <Switch value={paperTheme.dark} />
                         </View>
                         </View>
                     </TouchableRipple>
-
+                    <Caption style={styles.drawerFooter}>Made By Daniel Jun</Caption>
+                    <Caption style={styles.drawerFooter2}>github.com/danBlackSpade</Caption>
                 </Drawer.Section>
-            </View>
+            </ View>
         </DrawerContentScrollView>
     )
 }
@@ -167,5 +174,21 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 16,
     },
+    preferences: {
+        marginLeft: 15,
+        fontWeight: 'bold',
+    },
+    drawerFooter: {
+        marginTop: 100,
+        textAlign: 'center',
+        fontSize: 12,
+        lineHeight: 12,
+    },
+    drawerFooter2: {
+        marginTop: 0,
+        textAlign: 'center',
+        fontSize: 9,
+        
+    }
     });
 

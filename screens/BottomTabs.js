@@ -61,18 +61,14 @@ return (
             .string()}
         
         labeled={true}
-        
         sceneAnimationEnabled={false}
     >
         <Tab.Screen
-        
         name="Feed"
         component={Feed}
         options={{
             tabBarIcon: 'home-account',
             tabBarColor,
-
-            
         }}
         />
         <Tab.Screen
@@ -82,7 +78,6 @@ return (
         options={{
             tabBarIcon: 'bell-outline',
             tabBarColor,
-            
         }}
         />
         <Tab.Screen
@@ -92,12 +87,10 @@ return (
             tabBarIcon: ({ color }) => (
                 <MaterialCommunityIcons name='bookmark-outline' color={color} size={26}/>
             ),
-
             tabBarColor,
         }}
         />
     </Tab.Navigator>
-    
     
     <Portal>
         <SafeAreaView style={{flex:1}}>

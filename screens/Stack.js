@@ -26,7 +26,7 @@ export const StackNavigator = () => {
             // headerMode='screen'
             
             screenOptions={{
-                headerStyle: { backgroundColor: 'black' },
+                // headerStyle: { backgroundColor: 'black' },
                 headerMode: 'screen',
                 header: ({ navigation, route, options, back }) => {
                     
