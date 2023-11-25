@@ -52,7 +52,7 @@ export const Main = () => {
 
 
 
-    const [currentUser, setCurrentUser] = React.useState(null);
+    const [currentUser, setCurrentUser] = React.useState({'username': null, 'email': null, 'isLogged': false });
     async function checkUser() {
         try {
             const value = await AsyncStorage.getItem('userData');

@@ -12,6 +12,7 @@ import { BottomTabs } from './BottomTabs';
 import { Details } from './Details';
 import { Feed } from './Feed';
 import { Login } from './Login';
+import { Register } from './Register';
 
 const Stack = createStackNavigator();
 
@@ -118,6 +119,11 @@ export const StackNavigator = () => {
             name="Login"
             component={Login}
             options={{ headerTitle: 'Login' }}
+        />
+        <Stack.Screen 
+            name="Register"
+            component={Register}
+            options={{ headerTitle: 'Register' }}
         />
         </Stack.Navigator>
     )

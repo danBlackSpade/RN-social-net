@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { KeyboardAvoidingView, View, Text, TouchableOpacity } from 'react-native';
-// import { TextInput } from 'react-native-paper';
+import { KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import TextInput from '../components/TextInput';
 
 import { AuthContext } from '../contexts/AuthContext';
@@ -9,7 +9,8 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 
 
-export const Login = () => {
+export const Login = ({ navigation }) => {
+    const theme = useTheme();
 
     // user
     const [email, onChangeEmail] = React.useState('');
@@ -79,6 +80,9 @@ export const Login = () => {
                     value={password}
                     onChangeText={onChangePassword}
                 />
+                <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
+                    <Text>Forgot Password? TEST</Text>
+                </TouchableOpacity>
                 {/* <TouchableOpacity onPress={login} style={{backgroundColor:'green', height:50, width: 150}}>
                     <Text>Login</Text>
                 </ TouchableOpacity> */}
@@ -86,12 +90,20 @@ export const Login = () => {
                     onPress={ login }
                 >LOGIN</Button>
 
-                <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
-                    <Text>Forgot Password? TEST</Text>
-                </TouchableOpacity>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 20,
+
+                }}>
+                    <Text style={{ color:theme.colors.secondary }}> Don't have an account? </Text>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Register') }}>
+                        <Text style={{ fontWeight: 'bold', color: theme.colors.primary }}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
             
         </Background>
     );
 }
-
 
