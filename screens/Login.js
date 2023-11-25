@@ -79,14 +79,12 @@ export const Login = () => {
                     value={password}
                     onChangeText={onChangePassword}
                 />
-                <TouchableOpacity onPress={login} style={{backgroundColor:'green', height:50, width: 150}}>
+                {/* <TouchableOpacity onPress={login} style={{backgroundColor:'green', height:50, width: 150}}>
                     <Text>Login</Text>
-                </ TouchableOpacity>
+                </ TouchableOpacity> */}
                 <Button
                     title='Go to Register'
-                    onPress={() => { 
-
-                        navigation.navigate('Register'); }}
+                    onPress={() => login }
                 >LOGIN</Button>
 
                 <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
