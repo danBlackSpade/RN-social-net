@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { KeyboardAvoidingView, View, Text, Button, TouchableOpacity } from 'react-native';
+import { KeyboardAvoidingView, View, Text, TouchableOpacity } from 'react-native';
 // import { TextInput } from 'react-native-paper';
 import TextInput from '../components/TextInput';
 
 import { AuthContext } from '../contexts/AuthContext';
 import Background from '../components/Background';
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 
 export const Login = () => {
@@ -86,7 +87,7 @@ export const Login = () => {
                     onPress={() => { 
 
                         navigation.navigate('Register'); }}
-                />
+                >LOGIN</Button>
 
                 <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
                     <Text>Forgot Password? TEST</Text>
