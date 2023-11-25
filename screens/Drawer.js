@@ -20,8 +20,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StackNavigator } from './Stack';
-import { PreferencesContext } from '../contexts/preferencesContext';
-
+import { PreferencesContext } from '../contexts/PreferencesContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 
@@ -41,10 +41,14 @@ import { PreferencesContext } from '../contexts/preferencesContext';
 
 // const fadeAnim = React.useRef(new Animated.Value(0)).current;
 export function DrawerContent({ props, navigation }) {
+
     const paperTheme = useTheme();
     const { rtl, theme, toggleTheme, toggleRTL } = React.useContext(
         PreferencesContext
     );
+
+    
+    const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
     // const translateX = new Animated.interpolateNode(props.progress, {
     //     inputRange: [0, 0.5, 0.7, 0.8, 1],
@@ -108,7 +112,7 @@ export function DrawerContent({ props, navigation }) {
                         />
                         )}
                         label={() => (<Text style={{color: paperTheme.colors.secondary}}>Login or Register</Text>)}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => { navigation.navigate('Login'); }}
                     />
 
                     {/* <DrawerItem

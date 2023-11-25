@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { KeyboardAvoidingView, View, Text, Button } from 'react-native';
+import { KeyboardAvoidingView, View, Text, Button, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
-import authContext from '../contexts/authContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 export const Login = () => {
@@ -10,7 +11,7 @@ export const Login = () => {
     const [email, onChangeEmail] = React.useState('');
     const [password, onChangePassword] = React.useState('');
     const [username, onChangeUsername] = React.useState('');
-    const { currentUser, setCurrentUser } = React.useContext(authContext);
+    const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
     // display/hide component
     const [visible, setVisible] = React.useState('none');
@@ -43,7 +44,12 @@ export const Login = () => {
         // }
         if (email === u1.email && password === u1.password) {
             console.log('Logged In!');
-            setCurrentUser(u1);
+            setCurrentUser({
+                email: email,
+                password: password,
+                username: 'u1',
+                isLogged: true,
+            });
         } else {
             console.log('Incorrect email or password');
         }
@@ -56,11 +62,34 @@ export const Login = () => {
         >
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Login</Text>
+                <TextInput
+                    label='Email'
+                    value={email}
+                    onChangeText={onChangeEmail}
+                    returnKeyType='next'
+                    autoCapitalize='none'
+                    autoCompleteType='email'
+                    textContentType='emailAddress'
+                    keyboardType='email-address'
+                />
+                <TextInput
+                    label='Password'
+                    value={password}
+                    onChangeText={onChangePassword}
+                />
+                <TouchableOpacity onPress={login} style={{backgroundColor:'green', height:50, width: 150}}>
+                    <Text>Login</Text>
+                </ TouchableOpacity>
                 <Button
                     title='Go to Register'
-                    onPress={() => { console.log('CURRENTUSER HERE ' + currentUser); 
+                    onPress={() => { 
+
                         navigation.navigate('Register'); }}
                 />
+
+                <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
+                    <Text>Forgot Password? TEST</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );

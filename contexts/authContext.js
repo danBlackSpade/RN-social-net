@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import * as React from 'react';
 
+// const [currentUser, setCurrentUser] = React.useState({ 'username': null, 'email': null, 'isLogged': false });
 
-const authContext = createContext({ 'username': null, 'email': null, 'isLogged': false });
+export const AuthContext = React.createContext(null);
 
-export default authContext;
 
 

@@ -6,9 +6,11 @@ import {
 } from 'react-native-paper';
 import { I18nManager } from 'react-native';
 
-import { PreferencesContext } from '../contexts/preferencesContext';
+import { PreferencesContext } from '../contexts/PreferencesContext';
+import { AuthContext }  from '../contexts/AuthContext';
 import { RootNavigator } from '../components/RootNavigator';
 import { useColorScheme } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -16,6 +18,11 @@ import { useColorScheme } from 'react-native';
 
 
 export const Main = () => {
+
+    React.useEffect(() => {
+        checkUser();
+        console.log('useEffect');
+    }, []);
 
     const colorScheme = useColorScheme();
     const [theme, setTheme] = React.useState(colorScheme === 'dark' ? 'dark' : 'light');
@@ -43,7 +50,9 @@ export const Main = () => {
         [rtl, theme, toggleRTL, toggleTheme]
     )
 
-    const [currentUser, setCurrentUser] = React.useState({ 'username': null, 'email': null, 'isLogged': false });
+
+
+    const [currentUser, setCurrentUser] = React.useState(null);
     async function checkUser() {
         try {
             const value = await AsyncStorage.getItem('userData');
@@ -62,23 +71,25 @@ export const Main = () => {
 
     return (
         
-            <PaperProvider
-                theme={theme === 'light' 
-                    ? {
-                        ...PaperDefaultTheme,
-                        colors: { ...PaperDefaultTheme.colors}
-                    } 
-                    : {
-                        ...MD3DarkTheme,
-                        colors: { ...MD3DarkTheme.colors}
-                    }
+        <PaperProvider
+            theme={theme === 'light' 
+                ? {
+                    ...PaperDefaultTheme,
+                    colors: { ...PaperDefaultTheme.colors}
+                } 
+                : {
+                    ...MD3DarkTheme,
+                    colors: { ...MD3DarkTheme.colors}
                 }
-            >
-                <PreferencesContext.Provider value={preferences}>
+            }
+        >
+            <PreferencesContext.Provider value={preferences}>
+                <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
                     <RootNavigator />
-                </PreferencesContext.Provider>
-            </PaperProvider>
-       
+                </AuthContext.Provider>
+            </PreferencesContext.Provider>
+        </PaperProvider>
+    
     );
 };
 
