@@ -43,6 +43,22 @@ export const Main = () => {
         [rtl, theme, toggleRTL, toggleTheme]
     )
 
+    const [currentUser, setCurrentUser] = React.useState({ 'username': null, 'email': null, 'isLogged': false });
+    async function checkUser() {
+        try {
+            const value = await AsyncStorage.getItem('userData');
+            if (value !== null) {
+                setCurrentUser(JSON.parse(value));
+                return currentUser;
+            } else {
+                setCurrentUser({ 'username': null, 'email': null, 'isLogged': false });
+                console.log('no user');
+                return null;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         

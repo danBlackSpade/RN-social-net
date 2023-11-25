@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { BottomTabs } from './BottomTabs';
 import { Details } from './Details';
 import { Feed } from './Feed';
+import { Login } from './Login';
 
 const Stack = createStackNavigator();
 
@@ -69,7 +70,7 @@ export const StackNavigator = () => {
                             title === 'Feed' ? (
                                 <MaterialCommunityIcons
                                 style={{ marginRight: 10 }}
-                                name="twitter"
+                                name="star-four-points-outline"
                                 size={40}
                                 color={theme.colors.primary}
                                 />
@@ -107,6 +108,16 @@ export const StackNavigator = () => {
             name="Details"
             component={Details}
             options={{ headerTitle: 'Post' }}
+        />
+        <Stack.Screen 
+            name="Feed" 
+            component={Feed} 
+            options={{ headerTitle: 'Feed' }}
+        />
+        <Stack.Screen 
+            name="Login"
+            component={Login}
+            options={{ headerTitle: 'Login' }}
         />
         </Stack.Navigator>
     )

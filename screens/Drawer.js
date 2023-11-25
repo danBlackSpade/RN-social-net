@@ -40,7 +40,7 @@ import { PreferencesContext } from '../contexts/preferencesContext';
 // }
 
 // const fadeAnim = React.useRef(new Animated.Value(0)).current;
-export function DrawerContent(props) {
+export function DrawerContent({ props, navigation }) {
     const paperTheme = useTheme();
     const { rtl, theme, toggleTheme, toggleRTL } = React.useContext(
         PreferencesContext
@@ -76,13 +76,13 @@ export function DrawerContent(props) {
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 202
                             </Paragraph>
-                            <Caption style={styles.caption}>Likes|msgs</Caption>
+                            <Caption style={styles.caption}>Likes|msgs?</Caption>
                         </View>
                         <View style={styles.section}>
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 159
                             </Paragraph>
-                            <Caption style={styles.caption}>Liked|Friends</Caption>
+                            <Caption style={styles.caption}>Liked|Friends?</Caption>
                         </View>
                     </View>
                 </View>
@@ -98,6 +98,19 @@ export function DrawerContent(props) {
                         label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
                         onPress={() => {}}
                     />
+
+                    <DrawerItem
+                        icon={({ color, size }) => (
+                        <MaterialCommunityIcons
+                            name="login"
+                            color={paperTheme.colors.secondary}
+                            size={size}
+                        />
+                        )}
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Login or Register</Text>)}
+                        onPress={() => {navigation.navigate('Login')}}
+                    />
+
                     {/* <DrawerItem
                         icon={({ color, size }) => (
                         <MaterialCommunityIcons name="tune" color={paperTheme.colors.secondary} size={size} />
@@ -113,7 +126,7 @@ export function DrawerContent(props) {
                             size={size}
                         />
                         )}
-                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}> Friends?</Text>) }
+                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}> Friends? svd posts?</Text>) }
                         onPress={() => {}}
                     />
                     </Drawer.Section >
