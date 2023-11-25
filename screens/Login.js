@@ -63,7 +63,7 @@ export const Login = ({ navigation }) => {
     return (
         <Background>
                 <Text>Logo </Text>
-                <Header>Welcome back.</Header>
+                <Header>Bem vindo de volta</Header>
                 <TextInput
                     label='Email'
                     value={email}
@@ -76,7 +76,7 @@ export const Login = ({ navigation }) => {
                 /> 
                 
                 <TextInput
-                    label='Password'
+                    label='Senha'
                     value={password}
                     onChangeText={onChangePassword}
                 />
@@ -88,7 +88,7 @@ export const Login = ({ navigation }) => {
                 </ TouchableOpacity> */}
                 <Button
                     onPress={ login }
-                >LOGIN</Button>
+                >ENTRAR</Button>
 
                 <View style={{
                     flexDirection: 'row',
@@ -97,9 +97,9 @@ export const Login = ({ navigation }) => {
                     marginTop: 20,
 
                 }}>
-                    <Text style={{ color:theme.colors.secondary }}> Don't have an account? </Text>
+                    <Text style={{ color:theme.colors.secondary }}> Não possui uma conta? </Text>
                     <TouchableOpacity onPress={() => { navigation.navigate('Register') }}>
-                        <Text style={{ fontWeight: 'bold', color: theme.colors.primary }}>Sign Up</Text>
+                        <Text style={{ fontWeight: 'bold', color: theme.colors.primary }}>Registrar</Text>
                     </TouchableOpacity>
                 </View>
             
