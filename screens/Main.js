@@ -45,9 +45,9 @@ export const Main = () => {
 
 
     return (
-        <PreferencesContext.Provider value={preferences}>
+        
             <PaperProvider
-                theme={theme === 'dark' 
+                theme={theme === 'light' 
                     ? {
                         ...PaperDefaultTheme,
                         colors: { ...PaperDefaultTheme.colors}
@@ -58,9 +58,11 @@ export const Main = () => {
                     }
                 }
             >
-                <RootNavigator />
+                <PreferencesContext.Provider value={preferences}>
+                    <RootNavigator />
+                </PreferencesContext.Provider>
             </PaperProvider>
-        </PreferencesContext.Provider>
+       
     );
 };
 
