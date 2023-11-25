@@ -61,7 +61,7 @@ export const Login = () => {
 
     return (
         <Background>
-                <Text>Logo</Text>
+                <Text>Logo </Text>
                 <Header>Welcome back.</Header>
                 <TextInput
                     label='Email'
@@ -83,8 +83,7 @@ export const Login = () => {
                     <Text>Login</Text>
                 </ TouchableOpacity> */}
                 <Button
-                    title='Go to Register'
-                    onPress={() => login }
+                    onPress={ login }
                 >LOGIN</Button>
 
                 <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>

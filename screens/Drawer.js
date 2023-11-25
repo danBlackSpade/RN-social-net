@@ -91,7 +91,11 @@ export function DrawerContent({ props, navigation }) {
                     </View>
                 </View>
                 <Drawer.Section style={styles.drawerSection}>
-                    <DrawerItem
+
+                    {/* create if currentUser,loggedIn */}
+                    { currentUser.isLogged
+                    ? (
+                        <DrawerItem
                         icon={({ color, size }) => (
                         <MaterialCommunityIcons
                             name="account-outline"
@@ -102,7 +106,8 @@ export function DrawerContent({ props, navigation }) {
                         label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
                         onPress={() => {}}
                     />
-
+                    )
+                    : (
                     <DrawerItem
                         icon={({ color, size }) => (
                         <MaterialCommunityIcons
@@ -114,6 +119,9 @@ export function DrawerContent({ props, navigation }) {
                         label={() => (<Text style={{color: paperTheme.colors.secondary}}>Login or Register</Text>)}
                         onPress={() => { navigation.navigate('Login'); }}
                     />
+                    )
+                    }
+
 
                     {/* <DrawerItem
                         icon={({ color, size }) => (
