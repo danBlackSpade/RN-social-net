@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { KeyboardAvoidingView, View, Text, Button, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-paper';
+// import { TextInput } from 'react-native-paper';
+import TextInput from '../components/TextInput';
 
 import { AuthContext } from '../contexts/AuthContext';
+import Background from '../components/Background';
+import Header from '../components/Header';
 
 
 export const Login = () => {
@@ -56,12 +59,9 @@ export const Login = () => {
     }
 
     return (
-        <KeyboardAvoidingView
-            behavior='padding'
-            style={{ flex: 1 }}
-        >
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Login</Text>
+        <Background>
+                <Text>Logo</Text>
+                <Header>Welcome back.</Header>
                 <TextInput
                     label='Email'
                     value={email}
@@ -71,7 +71,8 @@ export const Login = () => {
                     autoCompleteType='email'
                     textContentType='emailAddress'
                     keyboardType='email-address'
-                />
+                /> 
+                
                 <TextInput
                     label='Password'
                     value={password}
@@ -90,8 +91,8 @@ export const Login = () => {
                 <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
                     <Text>Forgot Password? TEST</Text>
                 </TouchableOpacity>
-            </View>
-        </KeyboardAvoidingView>
+            
+        </Background>
     );
 }
 
