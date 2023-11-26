@@ -135,15 +135,10 @@ export function DrawerContent({ props, navigation }) {
                     /> */}
                     <DrawerItem
                         icon={({ color, size }) => (
-                        // <MaterialCommunityIcons
-                        //     name="user-group"
-                        //     color={paperTheme.colors.secondary}
-                        //     size={size}
-                        // />
                             <FontAwesomeIcon icon={faUserGroup} size={size} color={paperTheme.colors.secondary} />
                         )}
                         label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
-                        onPress={() => {}}
+                        onPress={() => { navigation.navigate('Friends'); }}
                     />
                     </Drawer.Section >
                     <Drawer.Section  style={styles.preferences}>

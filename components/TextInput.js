@@ -12,7 +12,7 @@ const TextInput = ({errorText, ...props}) => {
             <TextInputPaper
                 // style={styles.input}
                 selectionColor={theme.colors.primary}
-                // backgroundColor={theme.colors.surface}
+                // backgroundColor={theme.colors.secondaryVariant}
                 underlineColor='transparent'
                 mode='outlined'
                 {...props}

@@ -8,6 +8,9 @@ const Friends = () => {
     return (
         <View>
             <Text>Friends</Text>
+            <Text>JAHSGDjhag hasgdhashSH</Text>
         </View>
     )
 }
+
+export default React.memo(Friends);
