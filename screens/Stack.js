@@ -134,7 +134,7 @@ export const StackNavigator = () => {
         />
         <Stack.Screen
             name="Friends"
-            component={Feed}
+            component={Friends}
             options={{ headerTitle: 'Friends' }}
         />
         </Stack.Navigator>
