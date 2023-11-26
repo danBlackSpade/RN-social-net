@@ -13,6 +13,7 @@ import { Details } from './Details';
 import { Feed } from './Feed';
 import { Login } from './Login';
 import { Register } from './Register';
+import Post from './Post';
 
 const Stack = createStackNavigator();
 
@@ -124,6 +125,11 @@ export const StackNavigator = () => {
             name="Register"
             component={Register}
             options={{ headerTitle: 'Register' }}
+        />
+        <Stack.Screen
+            name="Post"
+            component={Post}
+            options={{ headerTitle: 'Post' }}
         />
         </Stack.Navigator>
     )

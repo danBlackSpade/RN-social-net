@@ -17,11 +17,13 @@ import {
     Switch,
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StackNavigator } from './Stack';
 import { PreferencesContext } from '../contexts/PreferencesContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { faRightToBracket, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -80,13 +82,13 @@ export function DrawerContent({ props, navigation }) {
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 202
                             </Paragraph>
-                            <Caption style={styles.caption}>Likes|msgs?</Caption>
+                            <Caption style={styles.caption}>Gostei</Caption>
                         </View>
                         <View style={styles.section}>
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 159
                             </Paragraph>
-                            <Caption style={styles.caption}>Liked|Friends?</Caption>
+                            <Caption style={styles.caption}>Amigos</Caption>
                         </View>
                     </View>
                 </View>
@@ -96,27 +98,28 @@ export function DrawerContent({ props, navigation }) {
                     { currentUser.isLogged
                     ? (
                         <DrawerItem
-                        icon={({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="account-outline"
-                            color={paperTheme.colors.secondary}
-                            size={size}
+                            icon={({ color, size }) => (
+                            <MaterialCommunityIcons
+                                name="account-outline"
+                                color={paperTheme.colors.secondary}
+                                size={size}
+                            />
+                            )}
+                            label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
+                            onPress={() => {}}
                         />
-                        )}
-                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
-                        onPress={() => {}}
-                    />
                     )
                     : (
                     <DrawerItem
                         icon={({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="login"
-                            color={paperTheme.colors.secondary}
-                            size={size}
-                        />
+                        // <MaterialCommunityIcons
+                        //     name="login"
+                        //     color={paperTheme.colors.secondary}
+                        //     size={size}
+                        // />
+                        <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
                         )}
-                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Login or Register</Text>)}
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
                         onPress={() => { navigation.navigate('Login'); }}
                     />
                     )
@@ -132,18 +135,19 @@ export function DrawerContent({ props, navigation }) {
                     /> */}
                     <DrawerItem
                         icon={({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="bookmark-outline"
-                            color={paperTheme.colors.secondary}
-                            size={size}
-                        />
+                        // <MaterialCommunityIcons
+                        //     name="user-group"
+                        //     color={paperTheme.colors.secondary}
+                        //     size={size}
+                        // />
+                            <FontAwesomeIcon icon={faUserGroup} size={size} color={paperTheme.colors.secondary} />
                         )}
-                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}> Friends? svd posts?</Text>) }
+                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
                         onPress={() => {}}
                     />
                     </Drawer.Section >
                     <Drawer.Section  style={styles.preferences}>
-                    <Title style={styles.preferences}>Preferences</Title>
+                    <Title style={styles.preferences}>Preferências</Title>
                     
                     <TouchableRipple onPress={toggleTheme}>
                         <View style={styles.preference}>
