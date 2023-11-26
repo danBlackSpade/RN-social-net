@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 import {
     DrawerItem,
     DrawerContentScrollView,
@@ -17,26 +17,16 @@ import {
     Switch,
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StackNavigator } from './Stack';
+import { PreferencesContext } from '../contexts/PreferencesContext';
+import { AuthContext } from '../contexts/AuthContext';
+import { faRightToBracket, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 
-const DrawerNav = createDrawerNavigator();
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
-            <Text>Home Screen</Text>
-        </View>
-    );
-}
-export const RootNavigator = () => {
-        return (
-            <DrawerNav.Navigator drawerContent={() => <DrawerContent />}>
-                <DrawerNav.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
-            </DrawerNav.Navigator>
-    );
-};
+
 
 
 
@@ -51,12 +41,32 @@ export const RootNavigator = () => {
 //     )
 // }
 
+// const fadeAnim = React.useRef(new Animated.Value(0)).current;
+export function DrawerContent({ props, navigation }) {
 
-export function DrawerContent(props) {
+    const paperTheme = useTheme();
+    const { rtl, theme, toggleTheme, toggleRTL } = React.useContext(
+        PreferencesContext
+    );
+
+    
+    const { currentUser, setCurrentUser } = React.useContext(AuthContext);
+
+    // const translateX = new Animated.interpolateNode(props.progress, {
+    //     inputRange: [0, 0.5, 0.7, 0.8, 1],
+    //     outputRange: [-100, -85, -70, -45, 0],
+    // });
     return (
-        <DrawerContentScrollView {...props} >
+        <DrawerContentScrollView {...props}  style={{flex: 1, backgroundColor: paperTheme.colors.surfaceVariant}} >
             <View
-                style={styles.drawerContent}
+
+                // style={[
+                //     styles.drawerContent,
+                //     {
+                //         backgroundColor: paperTheme.colors.surface,
+                //         transform: [{ translateX }],
+                //     },
+                //     ]}
             >
                 <View style={styles.userInfoSection}>
                     <Avatar.Image 
@@ -72,59 +82,80 @@ export function DrawerContent(props) {
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 202
                             </Paragraph>
-                            <Caption style={styles.caption}>Likes|msgs</Caption>
+                            <Caption style={styles.caption}>Gostei</Caption>
                         </View>
                         <View style={styles.section}>
                             <Paragraph style={[styles.paragraph, styles.caption]}>
                                 159
                             </Paragraph>
-                            <Caption style={styles.caption}>Liked|Friends</Caption>
+                            <Caption style={styles.caption}>Amigos</Caption>
                         </View>
                     </View>
                 </View>
                 <Drawer.Section style={styles.drawerSection}>
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="account-outline"
-                            color={color}
-                            size={size}
+
+                    {/* create if currentUser,loggedIn */}
+                    { currentUser.isLogged
+                    ? (
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                            <MaterialCommunityIcons
+                                name="account-outline"
+                                color={paperTheme.colors.secondary}
+                                size={size}
+                            />
+                            )}
+                            label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
+                            onPress={() => {}}
                         />
-                        )}
-                        label="Profile"
-                        onPress={() => {}}
-                    />
+                    )
+                    : (
                     <DrawerItem
                         icon={({ color, size }) => (
-                        <MaterialCommunityIcons name="tune" color={color} size={size} />
+                        // <MaterialCommunityIcons
+                        //     name="login"
+                        //     color={paperTheme.colors.secondary}
+                        //     size={size}
+                        // />
+                        <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
                         )}
-                        label="Preferences"
-                        onPress={() => {}}
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
+                        onPress={() => { navigation.navigate('Login'); }}
                     />
+                    )
+                    }
+
+
+                    {/* <DrawerItem
+                        icon={({ color, size }) => (
+                        <MaterialCommunityIcons name="tune" color={paperTheme.colors.secondary} size={size} />
+                        )}
+                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Preferences</Text>)}
+                        onPress={() => {}}
+                    /> */}
                     <DrawerItem
                         icon={({ color, size }) => (
-                        <MaterialCommunityIcons
-                            name="bookmark-outline"
-                            color={color}
-                            size={size}
-                        />
+                            <FontAwesomeIcon icon={faUserGroup} size={size} color={paperTheme.colors.secondary} />
                         )}
-                        label="Friends"
-                        onPress={() => {}}
+                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
+                        onPress={() => { navigation.navigate('Friends'); }}
                     />
-                    </Drawer.Section>
-                    <Drawer.Section title="Menu 2">
-                    <TouchableRipple onPress={() => {}}>
+                    </Drawer.Section >
+                    <Drawer.Section  style={styles.preferences}>
+                    <Title style={styles.preferences}>Preferências</Title>
+                    
+                    <TouchableRipple onPress={toggleTheme}>
                         <View style={styles.preference}>
                         <Text>Dark Theme</Text>
                         <View pointerEvents="none">
-                            <Switch value={false} />
+                            <Switch value={paperTheme.dark} />
                         </View>
                         </View>
                     </TouchableRipple>
-
+                    <Caption style={styles.drawerFooter}>Made By Daniel Jun</Caption>
+                    <Caption style={styles.drawerFooter2}>github.com/danBlackSpade</Caption>
                 </Drawer.Section>
-            </View>
+            </ View>
         </DrawerContentScrollView>
     )
 }
@@ -167,5 +198,21 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 16,
     },
+    preferences: {
+        marginLeft: 15,
+        fontWeight: 'bold',
+    },
+    drawerFooter: {
+        marginTop: 100,
+        textAlign: 'center',
+        fontSize: 12,
+        lineHeight: 12,
+    },
+    drawerFooter2: {
+        marginTop: 0,
+        textAlign: 'center',
+        fontSize: 9,
+        
+    }
     });
 

@@ -10,10 +10,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Overlay from '../utils/Overlay';
 import { Feed } from './Feed';
 import { Details } from './Details';
+import Post from './Post';
 // import { Message } from './Message';
 // import { Notifications } from './notifications';
 // import { StackNavigatorParamlist } from './types';
 import { appTheme } from '../App';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faThumbsUp, faBell, faHouse, faPlus } from '@fortawesome/free-solid-svg-icons';
+// import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,9 +25,12 @@ const Tab = createMaterialBottomTabNavigator();
 // route: RouteProp<StackNavigatorParamlist, 'FeedList'>;
 // };
 
-export const BottomTabs = (props) => {
-const routeName = props.route.state
-    ? props.route.state.routes[props.route.state.index].name
+export const BottomTabs = ({ props, route, navigation }) => {
+// const routeName = props.route.state
+//     ? props.route.state.routes[props.route.state.index].name
+//     : 'Feed';
+    const routeName = route.state
+    ? route.state.routes[route.state.index].name
     : 'Feed';
 
 const theme = useTheme();
@@ -33,7 +40,7 @@ const isFocused = useIsFocused();
 let icon = 'feather';
 
 switch (routeName) {
-    case 'Messages':
+    case 'Feed':
     icon = 'email-plus-outline';
     break;
     default:
@@ -61,62 +68,63 @@ return (
             .string()}
         
         labeled={true}
-        
         sceneAnimationEnabled={false}
     >
         <Tab.Screen
-        
-        name="Feed"
-        component={Feed}
-        options={{
-            tabBarIcon: 'home-account',
-            tabBarColor,
-
-            
+            name="Feed"
+            component={Feed}
+            options={{
+                tabBarIcon: ({ color }) => (
+                    <FontAwesomeIcon icon={faHouse} size={26} color={color} />
+                ),
+                tabBarColor,
         }}
         />
         <Tab.Screen
-        tabBarLabel={{ color: 'red' }}
-        name="Notifications"
-        component={Feed}
-        options={{
-            tabBarIcon: 'bell-outline',
-            tabBarColor,
-            
+            tabBarLabel={{ color: 'red' }}
+            name="Notificações"
+            component={Feed}
+            options={{
+                tabBarIcon: ({ color }) => (
+                    <FontAwesomeIcon icon={faBell} size={26} color={color} />
+                ),
+                tabBarColor,
         }}
         />
         <Tab.Screen
-        name="Bookmarks"
-        component={Details}
-        options={{
-            tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name='bookmark-outline' color={color} size={26}/>
-            ),
-
-            tabBarColor,
+            name="Gostei"
+            component={Details}
+            options={{
+                tabBarIcon: ({ color }) => (
+                    // <MaterialCommunityIcons name='bookmark-outline' color={color} size={26}/>
+                    <FontAwesomeIcon icon={faThumbsUp} size={26} color={color} />
+                ),
+                tabBarColor,
         }}
         />
     </Tab.Navigator>
     
-    
     <Portal>
         <SafeAreaView style={{flex:1}}>
             <FAB
-            visible={isFocused}
-            icon={icon}
-            style={{
-                position: 'absolute',
-                bottom: 95,
-                right: 16,
-            }}
-            color="black"
-            theme={{
-                colors: {
-                    // accent: theme.colors.primary,
-                },
-            }}
-            onPress={() => {alert(theme.colors.background)}}
-            />
+                visible={isFocused}
+                // icon={icon}
+                icon={({color, size }) => ( 
+                    <FontAwesomeIcon icon={faPlus} size={size} color={color} />
+                )}
+                style={{
+                    position: 'absolute',
+                    bottom: 95,
+                    right: 16,
+                }}
+                color="black"
+                theme={{
+                    colors: {
+                        // accent: theme.colors.primary,
+                    },
+                }}
+                onPress={() => {navigation.navigate('Post')} }
+                />
             {/* <Text>{theme.colors.primary}</Text> */}
         </ SafeAreaView>
     </Portal>

@@ -11,6 +11,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { BottomTabs } from './BottomTabs';
 import { Details } from './Details';
 import { Feed } from './Feed';
+import { Login } from './Login';
+import { Register } from './Register';
+import Post from './Post';
+import Friends from './Friends';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +30,7 @@ export const StackNavigator = () => {
             // headerMode='screen'
             
             screenOptions={{
-                headerStyle: { backgroundColor: 'black' },
+                // headerStyle: { backgroundColor: 'black' },
                 headerMode: 'screen',
                 header: ({ navigation, route, options, back }) => {
                     
@@ -69,7 +73,7 @@ export const StackNavigator = () => {
                             title === 'Feed' ? (
                                 <MaterialCommunityIcons
                                 style={{ marginRight: 10 }}
-                                name="twitter"
+                                name="star-four-points-outline"
                                 size={40}
                                 color={theme.colors.primary}
                                 />
@@ -107,6 +111,31 @@ export const StackNavigator = () => {
             name="Details"
             component={Details}
             options={{ headerTitle: 'Post' }}
+        />
+        <Stack.Screen 
+            name="Feed" 
+            component={Feed} 
+            options={{ headerTitle: 'Feed' }}
+        />
+        <Stack.Screen 
+            name="Login"
+            component={Login}
+            options={{ headerTitle: 'Login' }}
+        />
+        <Stack.Screen 
+            name="Register"
+            component={Register}
+            options={{ headerTitle: 'Register' }}
+        />
+        <Stack.Screen
+            name="Post"
+            component={Post}
+            options={{ headerTitle: 'Post' }}
+        />
+        <Stack.Screen
+            name="Friends"
+            component={Friends}
+            options={{ headerTitle: 'Friends' }}
         />
         </Stack.Navigator>
     )
