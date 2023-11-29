@@ -9,8 +9,12 @@ import {
     TouchableRipple,
     useTheme,
     } from 'react-native-paper';
-    import { MaterialCommunityIcons } from '@expo/vector-icons';
-    import color from 'color';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import color from 'color';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+
 
     // type Props = {
     // id: number;
@@ -28,6 +32,7 @@ import {
 
     export const Post = (props) => {
     const theme = useTheme();
+    // icon({name: 'faThumbsDown', style: 'regular'  });
 
     const iconColor = color(theme.colors.onSurface)
         .alpha(0.54)
@@ -67,32 +72,53 @@ import {
                 },
                 ]}
             />
+            
             <View style={styles.bottomRow}>
                 <TouchableOpacity
                 onPress={() => {}}
                 hitSlop={{ top: 10, bottom: 10 }}
                 >
                 <View style={styles.iconContainer}>
-                    <MaterialCommunityIcons
+                    {/* <MaterialCommunityIcons
                     name="comment-outline"
                     size={12}
                     color={iconColor}
-                    />
+                    /> */}
+                    <FontAwesomeIcon icon={icon({name: 'computer-mouse'})} />
                     <Caption style={styles.iconDescription}>
                     {props.comments}
                     </Caption>
                 </View>
                 </TouchableOpacity>
+
                 <TouchableOpacity
-                onPress={() => {}}
-                hitSlop={{ top: 10, bottom: 10 }}
+                    onPress={() => {}}
+                    hitSlop={{ top: 10, bottom: 10 }}
                 >
                 <View style={styles.iconContainer}>
-                    <MaterialCommunityIcons
+                    <FontAwesomeIcon icon={icon({name: 'ranking-star', style: 'solid'})} /> 
+
+                    <Caption style={styles.iconDescription}>
+                    {props.retweets}
+                    </Caption>
+                </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => {}}
+                    hitSlop={{ top: 10, bottom: 10 }}
+                >
+                <View style={styles.iconContainer}>
+                    {/* <MaterialCommunityIcons
                     name="share-outline"
                     size={14}
                     color={iconColor}
-                    />
+                    /> */}
+
+                    {/* <FontAwesomeIcon icon={faThumbsDown} style={styles.thumbsDown}  />   */}
+                    {/* <FontAwesomeIcon icon={regular("thumbs-down")} /> */}
+                    <FontAwesomeIcon icon={icon({name: 'thumbs-down', style: 'regular'})} /> 
+
                     <Caption style={styles.iconDescription}>
                     {props.retweets}
                     </Caption>
@@ -103,11 +129,14 @@ import {
                 hitSlop={{ top: 10, bottom: 10 }}
                 >
                 <View style={styles.iconContainer}>
-                    <MaterialCommunityIcons
+                    {/* <MaterialCommunityIcons
                     name="heart-outline"
                     size={12}
                     color={iconColor}
-                    />
+                    /> */}
+                    {/* <FontAwesomeIcon icon={faThumbsUp} size={12} color={iconColor} 
+                    /> */}
+                    <FontAwesomeIcon icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
                     <Caption style={styles.iconDescription}>{props.hearts}</Caption>
                 </View>
                 </TouchableOpacity>
@@ -162,4 +191,8 @@ import {
         marginLeft: 2,
         lineHeight: 12,
     },
+
+    thumbsDown: {
+        fontWeight: 'regular'
+    }
 });
