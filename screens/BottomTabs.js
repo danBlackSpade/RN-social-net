@@ -17,6 +17,8 @@ import Post from './Post';
 import { appTheme } from '../App';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faThumbsUp, faBell, faHouse, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Likes from './Likes';
+import Notifications from './Notifications';
 // import { faBell } from '@fortawesome/free-regular-svg-icons';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -83,7 +85,7 @@ return (
         <Tab.Screen
             tabBarLabel={{ color: 'red' }}
             name="Notificações"
-            component={Feed}
+            component={Notifications}
             options={{
                 tabBarIcon: ({ color }) => (
                     <FontAwesomeIcon icon={faBell} size={26} color={color} />
@@ -93,7 +95,7 @@ return (
         />
         <Tab.Screen
             name="Gostei"
-            component={Details}
+            component={Likes}
             options={{
                 tabBarIcon: ({ color }) => (
                     // <MaterialCommunityIcons name='bookmark-outline' color={color} size={26}/>
