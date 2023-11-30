@@ -74,10 +74,10 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
             />
             
             <View style={styles.bottomRow}>
-                <TouchableOpacity
-                onPress={() => {}}
-                hitSlop={{ top: 10, bottom: 10 }}
-                >
+                {/* <TouchableOpacity */}
+                
+                {/* hitSlop={{ top: 10, bottom: 10 }}
+                > */}
                 <View style={styles.iconContainer}>
                     {/* <MaterialCommunityIcons
                     name="comment-outline"
@@ -89,12 +89,12 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
                     {props.comments}
                     </Caption>
                 </View>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
 
-                <TouchableOpacity
-                    onPress={() => {}}
+                {/* <TouchableOpacity
+                    
                     hitSlop={{ top: 10, bottom: 10 }}
-                >
+                > */}
                 <View style={styles.iconContainer}>
                     <FontAwesomeIcon icon={icon({name: 'ranking-star', style: 'solid'})} /> 
 
@@ -102,11 +102,11 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
                     {props.retweets}
                     </Caption>
                 </View>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
 
                 <TouchableOpacity
-                    onPress={() => {}}
-                    hitSlop={{ top: 10, bottom: 10 }}
+                    onPress={() => {alert('toggle thumbs down')}}
+                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 >
                 <View style={styles.iconContainer}>
                     {/* <MaterialCommunityIcons
@@ -117,7 +117,7 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
                     {/* <FontAwesomeIcon icon={faThumbsDown} style={styles.thumbsDown}  />   */}
                     {/* <FontAwesomeIcon icon={regular("thumbs-down")} /> */}
-                    <FontAwesomeIcon icon={icon({name: 'thumbs-down', style: 'regular'})} /> 
+                    <FontAwesomeIcon style={styles.icons} icon={icon({name: 'thumbs-down', style: 'regular'})} /> 
 
                     <Caption style={styles.iconDescription}>
                     {props.retweets}
@@ -125,8 +125,8 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
                 </View>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={() => {}}
-                hitSlop={{ top: 10, bottom: 10 }}
+                onPress={() => {alert('toggle thumbs up')}}
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 >
                 <View style={styles.iconContainer}>
                     {/* <MaterialCommunityIcons
@@ -178,10 +178,11 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
         height: 150,
     },
     bottomRow: {
-        paddingVertical: 10,
+        paddingVertical: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        
     },
     iconContainer: {
         flexDirection: 'row',
@@ -189,10 +190,10 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
     },
     iconDescription: {
         marginLeft: 2,
-        lineHeight: 12,
+        lineHeight: 30,
     },
+    // icons: {
+    //     color: 'red',
+    // }
 
-    thumbsDown: {
-        fontWeight: 'regular'
-    }
 });
