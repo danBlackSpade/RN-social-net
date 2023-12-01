@@ -32,7 +32,7 @@ export const Login = ({ navigation }) => {
         username: 'u1',
     };
 
-    async function login(navigation) {
+    async function sendLogin(navigation) {
     
         let response = await fetch('http://192.168.1.130:3000/login', {
             method: 'POST',
@@ -56,13 +56,12 @@ export const Login = ({ navigation }) => {
             json = JSON.parse(resData);
             await setCurrentUser({ 
                 email: json.email,
-                password: json.password,
                 username: json.username,
                 name: json.name,
                 isLogged: true,
             });
             console.log('Logged In! EMAIL:::: ' + currentUser.email);
-            console.log('go to home page')
+            navigation.navigate('Feed');
         }
 
     }
@@ -100,7 +99,7 @@ export const Login = ({ navigation }) => {
                     <Text>Login</Text>
                 </ TouchableOpacity> */}
                 <Button
-                    onPress={ login }
+                    onPress={ () => { sendLogin(navigation) } }
                 >ENTRAR</Button>
 
                 <View style={{
@@ -121,9 +120,9 @@ export const Login = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({ 
-    login_msg_error: (visible) => ({
+    login_msg_error: (text='none') => ({
         color: 'red',
-        display: visible,
+        display: text,
         fontWeight: 'bold',
         margin: 5,
         fontSize: 15,
