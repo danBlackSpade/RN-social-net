@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { View, Text, Touchable, TouchableOpacity } from 'react-native';
+import { View, Text, Touchable, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
 
 import { KeyboardAvoidingView } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import { TextInput } from 'react-native-paper';
 import Background from '../components/Background';
 import Header from '../components/Header';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
+import { AuthContext } from '../contexts/AuthContext';
 
 export const Register = ({ navigation }) => {
     const theme = useTheme();
@@ -18,36 +20,89 @@ export const Register = ({ navigation }) => {
     const [username, onChangeUsername] = React.useState('');
     const [visible, setVisible] = React.useState('none');
     const [name, onChangeName] = React.useState(''); 
-    
-        return (
-            <Background>
-                <Header>Crie sua conta</Header>
+    const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
+    const [headerVisible, setHeaderVisible] = React.useState('flex');
+    const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
+    React.useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { setKeyboardVisible(true); setHeaderVisible('none');  });
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => { setKeyboardVisible(false); setHeaderVisible('flex'); });
+        console.log('useEffect: Keyboard Check: ' + headerVisible + ' ' + isKeyboardVisible);
+        // cleanup function
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();	
+            // Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
+            // Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+        };
+        
+    }, []);
+    
+    async function sendRegister(navigation) {
+        let response = await fetch('http://192.168.1.130:3000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password, username: username, name: name }),
+        });
+        let json = await response.json();
+        if (json === 'error') {
+            setVisible('flex');
+            setTimeout(() => {
+                setVisible('none');
+            }, 10000);
+        } else {
+            await AsyncStorage.setItem('userData', JSON.stringify(json));
+            let resData = await AsyncStorage.getItem('userData');
+            json = JSON.parse(resData);
+            setCurrentUser({'username': json.username, 'email': json.email, 'name': json.name, 'isLoggedIn': true});
+            console.log('User registered successfully : ' + json.email);
+            navigation.navigate('Feed');
+        }
+    }
+
+        return (
+            <View style={{
+                flex: 1,
+                padding: 10,
+                width: '100%',
+                maxWidth: 340,
+                alignSelf: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                {/* <Text >Logo</Text> */}
+                <Background>
+                <View 
+                // style={{display: headerVisible}}
+                >
+                    <Header >Crie sua conta
+                    </Header>
+                </View>
+                
                 <TextInput 
                     label='Nome'
                     returnKeyType='next'
-                    value={name.value}
-                    onChangeText={text => onChangeName({ value: text, error: '' })}
-                    error={!!name.error}
-                    errorText={name.error}
+                    value={name}
+                    // onChangeText={text => onChangeName({ value: text, error: '' })}
+                    onChangeText={onChangeName}
+                    // error={!!name.error}
+                    // errorText={name.error}
                 />
 
                 <TextInput 
                     label='Nome de usuário'
                     returnKeyType='next'
-                    value={name.value}
-                    onChangeText={text => onChangeName({ value: text, error: '' })}
-                    error={!!name.error}
-                    errorText={name.error}
+                    value={username}
+                    onChangeText={onChangeUsername}
                 />
 
                 <TextInput 
                     label='Email'
                     returnKeyType='next'
-                    value={email.value}
-                    onChangeText={text => onChangeEmail({ value: text, error: '' })}
-                    error={!!email.error}
-                    errorText={email.error}
+                    value={email}
+                    onChangeText={onChangeEmail}
                     autoCapitalize='none'
                     autoCompleteType='email'
                     textContentType='emailAddress'
@@ -57,15 +112,13 @@ export const Register = ({ navigation }) => {
                 <TextInput
                     label='Senha'
                     returnKeyType='done'
-                    value={password.value}
-                    onChangeText={text => onChangePassword({ value: text, error: '' })}
-                    error={!!password.error}
-                    errorText={password.error}
+                    value={password}
+                    onChangeText={onChangePassword}
                     secureTextEntry
                 />
 
                 <Button
-                    onPress={() => console.log('register')}
+                    onPress={() => sendRegister(navigation) }
                     style={{ marginTop: 24 }}
                 >
                 REGISTRAR    
@@ -80,5 +133,15 @@ export const Register = ({ navigation }) => {
                 </View>
 
             </Background>
+            </View>
         );
 }
+
+const styles = StyleSheet.create({ 
+    header: (text="flex") => ({
+        display: text,
+    }),
+
+    
+
+});
