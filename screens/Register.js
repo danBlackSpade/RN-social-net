@@ -3,12 +3,14 @@ import { View, Text, Touchable, TouchableOpacity, StyleSheet, Keyboard } from 'r
 
 import { KeyboardAvoidingView } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import { TextInput } from 'react-native-paper';
 import Background from '../components/Background';
 import Header from '../components/Header';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
+import { AuthContext } from '../contexts/AuthContext';
 
 export const Register = ({ navigation }) => {
     const theme = useTheme();
@@ -20,6 +22,7 @@ export const Register = ({ navigation }) => {
     const [name, onChangeName] = React.useState(''); 
     const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
     const [headerVisible, setHeaderVisible] = React.useState('flex');
+    const { currentUser, setCurrentUser } = React.useContext(AuthContext);
 
     React.useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { setKeyboardVisible(true); setHeaderVisible('none');  });
@@ -81,28 +84,25 @@ export const Register = ({ navigation }) => {
                 <TextInput 
                     label='Nome'
                     returnKeyType='next'
-                    value={name.value}
-                    onChangeText={text => onChangeName({ value: text, error: '' })}
-                    error={!!name.error}
-                    errorText={name.error}
+                    value={name}
+                    // onChangeText={text => onChangeName({ value: text, error: '' })}
+                    onChangeText={onChangeName}
+                    // error={!!name.error}
+                    // errorText={name.error}
                 />
 
                 <TextInput 
                     label='Nome de usuário'
                     returnKeyType='next'
-                    value={name.value}
-                    onChangeText={text => onChangeName({ value: text, error: '' })}
-                    error={!!name.error}
-                    errorText={name.error}
+                    value={username}
+                    onChangeText={onChangeUsername}
                 />
 
                 <TextInput 
                     label='Email'
                     returnKeyType='next'
-                    value={email.value}
-                    onChangeText={text => onChangeEmail({ value: text, error: '' })}
-                    error={!!email.error}
-                    errorText={email.error}
+                    value={email}
+                    onChangeText={onChangeEmail}
                     autoCapitalize='none'
                     autoCompleteType='email'
                     textContentType='emailAddress'
@@ -112,10 +112,8 @@ export const Register = ({ navigation }) => {
                 <TextInput
                     label='Senha'
                     returnKeyType='done'
-                    value={password.value}
-                    onChangeText={text => onChangePassword({ value: text, error: '' })}
-                    error={!!password.error}
-                    errorText={password.error}
+                    value={password}
+                    onChangeText={onChangePassword}
                     secureTextEntry
                 />
 
