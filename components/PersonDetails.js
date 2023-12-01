@@ -16,9 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
-export const PostDetails = (props,{ route, navigation }) => {
+const PersonDetails = (props) => {
     const theme = useTheme();
-
 
     const contentColor = color(theme.colors.onSurface)
         .alpha(0.8)
@@ -34,24 +33,30 @@ export const PostDetails = (props,{ route, navigation }) => {
         <ScrollView>
         <Surface style={styles.container} elevation={2}>
             <View style={styles.topRow}>
-                <TouchableOpacity onPress={
-                    () => {
-                        // props.navigation && props.navigation.push('Person', { ...props});
-                        // navigation.navigate('Person', { ...props});
-                        // props.navigation.push('Person', { ...props});
-                    }
-                    }>
+                <TouchableOpacity onPress={ () => {
+                    alert('avatar');
+                    console.log(props);
+                }
+                }>
                     <Avatar.Image 
                         style={styles.avatar}
-                        source={{ uri: props.avatar }}
+                        // source={{ uri: props.avatar }}
                         size={60}
+
                     />
                 </TouchableOpacity>
-                <View>
+
+
+                {/* <View>
                     <Title>{props.name}</Title>
                     <Caption style={styles.handle}>{props.handle}</Caption>
+                </View> */}
+
+                <View>
+                    <Text>{props.name}</Text>
                 </View>
-                <View style={{ flex: 1, alignItems: 'flex-end' }}>
+
+                {/* <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <Text>Clicks</Text>
                     <Caption>{props.clicks}</Caption>
                 
@@ -59,9 +64,10 @@ export const PostDetails = (props,{ route, navigation }) => {
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <Text>Saldo</Text>
                     <Caption>{props.clicks}</Caption>
-                </View> 
+                </View>  */}
             </View>
-            <Text style={[styles.content, { color: contentColor }]}>
+
+            {/* <Text style={[styles.content, { color: contentColor }]}>
                 {props.content}
             </Text>
             <Image 
@@ -72,8 +78,8 @@ export const PostDetails = (props,{ route, navigation }) => {
                         borderColor: imageBorderColor,
                     },
                 ]}
-            />
-            <View style={styles.bottomRow}>
+            /> */}
+            {/* <View style={styles.bottomRow}>
                 <TouchableOpacity onPress={() => {alert('downvote')}}>
                     <View style={styles.iconContainer}>
                         <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-down', style: 'regular'  })} />
@@ -84,12 +90,14 @@ export const PostDetails = (props,{ route, navigation }) => {
                         <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-up', style: 'regular' })} />
                     </View>
                     </TouchableOpacity>
-            </View>
+            </View> */}
         </Surface>
             
         </ScrollView>
     )
 }
+
+
 
 
 const styles = StyleSheet.create({
@@ -136,3 +144,6 @@ const styles = StyleSheet.create({
     },
 
 })
+
+
+export default React.memo(PersonDetails);

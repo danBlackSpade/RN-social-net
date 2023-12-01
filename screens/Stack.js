@@ -15,6 +15,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import Post from './Post';
 import Friends from './Friends';
+import Person from './Person';
 
 const Stack = createStackNavigator();
 
@@ -137,6 +138,12 @@ export const StackNavigator = () => {
             component={Friends}
             options={{ headerTitle: 'Friends' }}
         />
+        <Stack.Screen 
+            name="Person"
+            component={Person}
+            options={{ headerTitle: 'Person' }}
+        />
+
         </Stack.Navigator>
     )
 
