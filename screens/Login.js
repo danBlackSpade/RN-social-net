@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { KeyboardAvoidingView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import TextInput from '../components/TextInput';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+import TextInput from '../components/TextInput';
 import { AuthContext } from '../contexts/AuthContext';
 import Background from '../components/Background';
 import Header from '../components/Header';
@@ -17,6 +19,7 @@ export const Login = ({ navigation }) => {
     const [password, onChangePassword] = React.useState('');
     const [username, onChangeUsername] = React.useState('');
     const { currentUser, setCurrentUser } = React.useContext(AuthContext);
+    const [display, setDisplay] = React.useState('none'); // [display, setDisplay
 
     // display/hide component
     const [visible, setVisible] = React.useState('none');
@@ -29,35 +32,38 @@ export const Login = ({ navigation }) => {
         username: 'u1',
     };
 
-    // React.useEffect(() => {
-    // //     if (currentUser) {
-    // //         setVisible('flex');
-    // //     } else {
-    // //         setVisible('none');
-    // //     }
-    // // }, [currentUser]);
-    //     setCurrentUser(u1);
-    //     // currentUser ? console.log(currentUser) : console.log('no user');
-    // }, []);
+    async function sendLogin(navigation) {
+    
+        let response = await fetch('http://192.168.1.130:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, password: password }),
+        });
+        let json = await response.json();
+        
+        if (json === 'error') {
+            console.log('Incorrect email or password');
+            setVisible('flex');
+            setTimeout(() => {
+                setVisible('none');
 
-    async function login() {
-        // try {
-        //     await firebase.auth().signInWithEmailAndPassword(email, password);
-        //     console.log('Logged In!');
-        // } catch (error) {
-        //     console.log(error);
-        // }
-        if (email === u1.email && password === u1.password) {
-            console.log('Logged In!');
-            setCurrentUser({
-                email: email,
-                password: password,
-                username: 'u1',
+            }, 10000);
+        } else {
+            await AsyncStorage.setItem('userData', JSON.stringify(json));
+            let resData = await AsyncStorage.getItem('userData');
+            json = JSON.parse(resData);
+            await setCurrentUser({ 
+                email: json.email,
+                username: json.username,
+                name: json.name,
                 isLogged: true,
             });
-        } else {
-            console.log('Incorrect email or password');
+            console.log('Logged In! EMAIL:::: ' + currentUser.email);
+            navigation.navigate('Feed');
         }
+
     }
 
     return (
@@ -79,7 +85,13 @@ export const Login = ({ navigation }) => {
                     label='Senha'
                     value={password}
                     onChangeText={onChangePassword}
+                    returnKeyType='done'
+                    secureTextEntry
+                    
                 />
+                <View>
+                    <Text style={styles.login_msg_error(visible)}>Usuário ou senha inválidos!</Text>
+                </View>
                 <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
                     <Text>Forgot Password? TEST</Text>
                 </TouchableOpacity>
@@ -87,7 +99,7 @@ export const Login = ({ navigation }) => {
                     <Text>Login</Text>
                 </ TouchableOpacity> */}
                 <Button
-                    onPress={ login }
+                    onPress={ () => { sendLogin(navigation) } }
                 >ENTRAR</Button>
 
                 <View style={{
@@ -107,3 +119,12 @@ export const Login = ({ navigation }) => {
     );
 }
 
+const styles = StyleSheet.create({ 
+    login_msg_error: (text='none') => ({
+        color: 'red',
+        display: text,
+        fontWeight: 'bold',
+        margin: 5,
+        fontSize: 15,
+    }),
+});

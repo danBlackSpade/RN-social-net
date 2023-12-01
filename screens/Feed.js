@@ -18,9 +18,9 @@ const posts = [
     image: 'https://pbs.twimg.com/media/EOUrCOcWAAA71rA?format=png&name=small',
     avatar:
     'https://i.pravatar.cc/100?u=john',
-    comments: 12,
-    retweets: 36,
-    hearts: 175,
+    clicks: 12,
+    dislikes: 36,
+    likes: 175,
 },
 {
     id: 2,
@@ -32,9 +32,9 @@ const posts = [
     image: 'https://pbs.twimg.com/media/EONH4KWX4AEV-JP?format=jpg&name=medium',
     avatar:
     'https://i.pravatar.cc/150?u=test',
-    comments: 64,
-    retweets: 87,
-    hearts: 400,
+    clicks: 64,
+    dislikes: 87,
+    likes: 400,
 },
 {
     id: 3,
@@ -47,9 +47,9 @@ const posts = [
     'https://static.antyweb.pl/uploads/2014/09/IPod_classic_6G_80GB_packaging-2007-09-22-1420x670.jpg',
     avatar:
     'https://i.pravatar.cc/100?u=elvis',
-    comments: 23,
-    retweets: 21,
-    hearts: 300,
+    clicks: 23,
+    dislikes: 21,
+    likes: 300,
 },
 {
     id: 4,
@@ -61,9 +61,9 @@ const posts = [
     image: 'https://pbs.twimg.com/media/EOUrCOcWAAA71rA?format=png&name=small',
     avatar:
     'https://i.pravatar.cc/100?u=kaka',
-    comments: 12,
-    retweets: 36,
-    hearts: 175,
+    clicks: 12,
+    dislikes: 36,
+    likes: 175,
 },
 {
     id: 5,
@@ -75,9 +75,9 @@ const posts = [
     image: 'https://pbs.twimg.com/media/EONH4KWX4AEV-JP?format=jpg&name=medium',
     avatar:
     'https://i.pravatar.cc/100?u=jao',
-    comments: 64,
-    retweets: 87,
-    hearts: 400,
+    clicks: 64,
+    dislikes: 87,
+    likes: 400,
 },
 {
     id: 6,
@@ -90,9 +90,9 @@ const posts = [
     // 'https://static.antyweb.pl/uploads/2014/09/IPod_classic_6G_80GB_packaging-2007-09-22-1420x670.jpg',
     avatar:
     'https://i.pravatar.cc/100?u=elvis',
-    comments: 23,
-    retweets: 21,
-    hearts: 300,
+    clicks: 23,
+    dislikes: 21,
+    likes: 300,
 },
 ];
 

@@ -58,7 +58,8 @@ const Friends = () => {
 
     const Item = (props) => (
         <View style={styles.item}>
-            <Text style={styles.title}>{props.name}</Text>
+            {/* <Text style={styles.title}>{props.name}</Text> */}
+            <Text> {props.handle}</Text>
             <Avatar.Image style={styles.avatars} source={{ uri: props.avatar }} size={60} />
         </View>
     );
