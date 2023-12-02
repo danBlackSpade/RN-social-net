@@ -64,14 +64,14 @@ import { useNavigation } from '@react-navigation/native';
                         alert(props.handle);
                         console.log(props);
                         // props.onPress('props.id'); 
-                        navigation.navigate('Person',  {...props} );
+                        navigation.navigate('Person',  props );
                     }}>
                     <Avatar.Image source={{ uri: props.avatar }} size={60} />
                 </TouchableOpacity>
             </View>
             
             <View style={styles.rightColumn}>
-                <TouchableOpacity onPress={() => {alert('go to person id page')}}>
+                <TouchableOpacity onPress={() => {navigation.navigate('Person',  props )}}>
                     <View style={styles.topRow}>
                         <Title>{props.name}</Title>
                         <Caption style={styles.handle}>{props.handle}</Caption>

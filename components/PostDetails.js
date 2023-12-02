@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
     Surface,
     Title,
@@ -16,8 +17,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 
-export const PostDetails = (props,{ route, navigation }) => {
+export const PostDetails = (props) => {
     const theme = useTheme();
+    const navigation = useNavigation();
 
 
     const contentColor = color(theme.colors.onSurface)
@@ -36,9 +38,7 @@ export const PostDetails = (props,{ route, navigation }) => {
             <View style={styles.topRow}>
                 <TouchableOpacity onPress={
                     () => {
-                        // props.navigation && props.navigation.push('Person', { ...props});
-                        // navigation.navigate('Person', { ...props});
-                        // props.navigation.push('Person', { ...props});
+                        navigation.navigate('Person', props)
                     }
                     }>
                     <Avatar.Image 
@@ -47,10 +47,12 @@ export const PostDetails = (props,{ route, navigation }) => {
                         size={60}
                     />
                 </TouchableOpacity>
-                <View>
-                    <Title>{props.name}</Title>
-                    <Caption style={styles.handle}>{props.handle}</Caption>
-                </View>
+                <TouchableOpacity onPress={() => {navigation.navigate('Person', props)}}>
+                    <View>
+                        <Title>{props.name}</Title>
+                        <Caption style={styles.handle}>{props.handle}</Caption>
+                    </View>
+                </TouchableOpacity>
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <Text>Clicks</Text>
                     <Caption>{props.clicks}</Caption>

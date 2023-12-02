@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
-import { Avatar } from 'react-native-paper';
+import { Avatar, useTheme } from 'react-native-paper';
 import Background from '../components/Background';
 
 
 const Friends = () => {
+    const theme = useTheme();
 
     //dummy data
     const data = [
@@ -57,9 +58,9 @@ const Friends = () => {
     // }
 
     const Item = (props) => (
-        <View style={styles.item}>
+        <View style={styles.item(theme)}>
             {/* <Text style={styles.title}>{props.name}</Text> */}
-            <Text> {props.handle}</Text>
+            <Text style={styles.handle(theme)}> {props.handle}</Text>
             <Avatar.Image style={styles.avatars} source={{ uri: props.avatar }} size={60} />
         </View>
     );
@@ -67,7 +68,7 @@ const Friends = () => {
     return (
         <View style={styles.container}>
             <FlatList 
-            
+                
                 data={data}
                 renderItem={({item}) => <Item {...item} />}
                 keyExtractor={item => item.id}
@@ -89,17 +90,21 @@ const styles = StyleSheet.create({
 
 
     },
-    item: {
+    item: (theme) => ({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#fff',
+        backgroundColor: theme.colors.surfaceVariant,
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
         borderRadius: 4,
-    },
-    
+    }),
+    handle: (theme) => ({
+        color: theme.colors.onSurfaceVariant,
+        fontSize: 16,
+        fontWeight: 'bold',
+    }),
 });
 
 export default React.memo(Friends);
