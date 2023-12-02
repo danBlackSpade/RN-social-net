@@ -8,9 +8,11 @@ const Person = (props) => {
     
         return (
             <PersonDetails {...props.route.params}/>
-        //     <View>
-        //         <Text>Person</Text>
-        //     </View>
+            // <View>
+            //     <Text>Person</Text>
+            //     <Text>{props.route.params.handle}</Text>
+            //     <Text>{props.route.params.avatar}</Text>
+            // </View>
         )
 };
 

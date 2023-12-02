@@ -62,8 +62,9 @@ import { useNavigation } from '@react-navigation/native';
             <View style={styles.leftColumn}>
                 <TouchableOpacity onPress={() => { 
                         alert(props.handle);
+                        console.log(props);
                         // props.onPress('props.id'); 
-                        navigation.navigate('Person');
+                        navigation.navigate('Person',  {...props} );
                     }}>
                     <Avatar.Image source={{ uri: props.avatar }} size={60} />
                 </TouchableOpacity>

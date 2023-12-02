@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, ScrollView, TouchableOpacity, Pressable } from 'react-native';
 import {
     Surface,
     Title,
@@ -30,8 +30,8 @@ const PersonDetails = (props) => {
         .string();
 
     return (
-        <ScrollView>
-        <Surface style={styles.container} elevation={2}>
+        // <ScrollView >
+        <Surface style={styles.container} elevation={4}>
             <View style={styles.topRow}>
                 <TouchableOpacity onPress={ () => {
                     alert('avatar');
@@ -40,60 +40,49 @@ const PersonDetails = (props) => {
                 }>
                     <Avatar.Image 
                         style={styles.avatar}
-                        // source={{ uri: props.avatar }}
-                        size={60}
+                        source={{ uri: props.avatar }}
+                        size={100}
 
                     />
                 </TouchableOpacity>
 
 
-                {/* <View>
-                    <Title>{props.name}</Title>
-                    <Caption style={styles.handle}>{props.handle}</Caption>
-                </View> */}
-
                 <View>
-                    <Text>{props.name}</Text>
+                    <Title>{props.name}</Title>
+                    {/* <Caption style={styles.handle}>{props.handle}</Caption> */}
                 </View>
 
-                {/* <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                <Text>Clicks</Text>
-                    <Caption>{props.clicks}</Caption>
+                <View style={{ marginVertical:10 }}>
+                    <Text>{props.handle}</Text>
+                </View>
+
+                <View>
+                <Text style={styles.title}>Clicks</Text>
+                    <Caption style={styles.caption}>{props.clicks}</Caption>
                 
                 </View> 
-                <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                <Text>Saldo</Text>
-                    <Caption>{props.clicks}</Caption>
-                </View>  */}
+                <View >
+                <Text style={styles.title}>Saldo</Text>
+                    <Caption style={styles.caption}>{props.clicks}</Caption>
+                </View> 
             </View>
+            <View style={styles.bottomRow}>
+                <Pressable 
+                    style={styles.button(theme)}
+                    onPress={() => {
+                        alert('add friend ' + props.handle);
+                        console.log(props.handle);
+                    }}
+                >
+                    <Text style={styles.txtButton(theme)}>Adicionar</Text>
+                </Pressable>
+            
+            
 
-            {/* <Text style={[styles.content, { color: contentColor }]}>
-                {props.content}
-            </Text>
-            <Image 
-                source={{ uri: props.image }}
-                style={[
-                    styles.image,
-                    {
-                        borderColor: imageBorderColor,
-                    },
-                ]}
-            /> */}
-            {/* <View style={styles.bottomRow}>
-                <TouchableOpacity onPress={() => {alert('downvote')}}>
-                    <View style={styles.iconContainer}>
-                        <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-down', style: 'regular'  })} />
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {alert('upvote')}}>
-                    <View style={styles.iconContainer}>
-                        <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-up', style: 'regular' })} />
-                    </View>
-                    </TouchableOpacity>
-            </View> */}
+            </View>
         </Surface>
             
-        </ScrollView>
+        // </ScrollView>
     )
 }
 
@@ -103,46 +92,77 @@ const PersonDetails = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        // flexDirection: 'column',
+        padding: 50,
+        flexDirection: 'column',
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
     },
+    // myTheme: (theme) => ({ 
+    //     backgroundColor: theme.colors.primary,
+    //     borderRadius: 10,
+    // }),
     topRow: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         alignItems: 'center',
     },
     avatar: {
-        marginRight: 20,
+        // marginRight: 20,
     },
     handle: {
-        marginRight: 3,
+        // marginRight: 3,
         lineHeight: 12,
         fontWeight: 'bold',
     },
-    content: {
-        marginTop: 25,
-        fontSize: 20,
-        lineHeight: 30,
 
-    },
-    image: {
-        borderWidth: StyleSheet.hairlineWidth,
-        marginTop: 25,
-        borderRadius: 20,
-        width: '100%',
-        height: 280,
-    },
+    // image: {
+    //     borderWidth: StyleSheet.hairlineWidth,
+    //     marginTop: 25,
+    //     borderRadius: 20,
+    //     width: '100%',
+    //     height: 280,
+    // },
     bottomRow: { 
         paddingVertical: 15,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
+        width: '100%'
     },
     iconContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // alignItems: 'center',
         // justifyContent: 'flex-end'
     },
-
+    caption: {
+        fontSize: 14,
+        lineHeight: 20,
+        alignSelf: 'center',
+    },
+    title: {
+        marginTop: 20,
+        fontWeight: 'bold',
+    },
+    button: (theme) => ({
+        backgroundColor: theme.colors.primary,
+        borderRadius: 20,
+        width: '60%',
+        height: 80,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+        marginHorizontal: 10,
+        // alignContent: 'center'
+        
+    }),
+    txtButton: (theme) => ({
+        color: theme.colors.onPrimary,
+        fontSize: 24,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        
+    }),
 })
 
 
