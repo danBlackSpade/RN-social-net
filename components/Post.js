@@ -32,11 +32,14 @@ import { useNavigation } from '@react-navigation/native';
     // onPress: (id: number) => void;
     // };
 
+    // TODO: limit max number of caption ie: 10k+, 100k+. 1m+, etc
+    
     export const Post = (props) => {
     const theme = useTheme();
 
     const navigation = useNavigation();
-    // icon({name: 'faThumbsDown', style: 'regular'  });
+    const [isThumbsUp, setIsThumbsUp] = React.useState(null);
+    const [iconStyle, setIconStyle] = React.useState(null);
 
     const iconColor = color(theme.colors.onSurface)
         .alpha(0.54)
@@ -53,6 +56,8 @@ import { useNavigation } from '@react-navigation/native';
         .rgb()
         .string();
 
+    
+
     return (
         <TouchableRipple onPress={() => { 
             props.onPress(props.id);
@@ -61,7 +66,7 @@ import { useNavigation } from '@react-navigation/native';
             
             <View style={styles.leftColumn}>
                 <TouchableOpacity onPress={() => { 
-                        alert(props.handle);
+                        // alert(props.handle);
                         console.log(props);
                         // props.onPress('props.id'); 
                         navigation.navigate('Person',  props );
@@ -101,9 +106,11 @@ import { useNavigation } from '@react-navigation/native';
                         size={12}
                         color={iconColor}
                         /> */}
-                        <FontAwesomeIcon icon={icon({name: 'computer-mouse'})} />
+                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'computer-mouse'})} />
+
+                        
                         <Caption style={styles.iconDescription}>
-                        {props.comments}
+                        {props.comments} 1232
                         </Caption>
                     </View>
                     {/* </TouchableOpacity> */}
@@ -113,16 +120,16 @@ import { useNavigation } from '@react-navigation/native';
                         hitSlop={{ top: 10, bottom: 10 }}
                     > */}
                     <View style={styles.iconContainer}>
-                        <FontAwesomeIcon icon={icon({name: 'ranking-star', style: 'solid'})} /> 
+                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'ranking-star', style: 'solid'})} /> 
 
                         <Caption style={styles.iconDescription}>
-                        {props.retweets}
+                        {props.retweets} 555
                         </Caption>
                     </View>
                     {/* </TouchableOpacity> */}
 
                     <TouchableOpacity
-                        onPress={() => {alert('toggle thumbs down')}}
+                        onPress={() => {setIconStyle('solid'); console.log(isThumbsUp); }}
                         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20  }}
                     >
                     <View style={styles.iconContainer}>
@@ -134,10 +141,10 @@ import { useNavigation } from '@react-navigation/native';
 
                         {/* <FontAwesomeIcon icon={faThumbsDown} style={styles.thumbsDown}  />   */}
                         {/* <FontAwesomeIcon icon={regular("thumbs-down")} /> */}
-                        <FontAwesomeIcon style={styles.icons} icon={icon({name: 'thumbs-down', style: 'regular'})} /> 
+                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} /> 
 
                         <Caption style={styles.iconDescription}>
-                        {props.retweets}
+                        {props.retweets} 1235
                         </Caption>
                     </View>
                     </TouchableOpacity>
@@ -153,8 +160,10 @@ import { useNavigation } from '@react-navigation/native';
                         /> */}
                         {/* <FontAwesomeIcon icon={faThumbsUp} size={12} color={iconColor} 
                         /> */}
-                        <FontAwesomeIcon icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
-                        <Caption style={styles.iconDescription}>{props.hearts}</Caption>
+                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
+                        <Caption style={styles.iconDescription}>{props.hearts}
+                        12312
+                        </Caption>
                     </View>
                     </TouchableOpacity>
                 </View>
@@ -202,15 +211,19 @@ import { useNavigation } from '@react-navigation/native';
         
     },
     iconContainer: {
-            flexDirection: 'row',
+            // flexDirection: 'row',
             alignItems: 'center',
     },
     iconDescription: {
         marginLeft: 2,
         lineHeight: 30,
     },
-    // icons: {
-    //     color: 'red',
-    // }
+    icons: (theme) => ({
+        // fontColor: theme.colors.onBackground,
+    }),
+    icon: (theme) => ({
+        color: theme.colors.secondary,
+        style: 'solid',
+    })
 
 });
