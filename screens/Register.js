@@ -44,7 +44,12 @@ export const Register = ({ navigation }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: email, password: password, username: username, name: name }),
+            body: JSON.stringify({ 
+                name: name,
+                email: email, 
+                password: password, 
+                username: username, 
+            }),
         });
         let json = await response.json();
         if (json === 'error') {
