@@ -76,8 +76,11 @@ const PersonDetails = (props) => {
                 >
                     <Text style={styles.txtButton(theme)}>Adicionar</Text>
                 </Pressable>
-            
-            
+            </View>
+            <View>
+                <Text style={styles.title}>Histórico de msgs?</Text>
+                <Text style={styles.title}>Histórico de msgs?</Text>
+                <Text style={styles.title}>Histórico de msgs?</Text>
 
             </View>
         </Surface>

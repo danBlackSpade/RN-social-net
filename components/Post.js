@@ -38,7 +38,7 @@ import { useNavigation } from '@react-navigation/native';
     const theme = useTheme();
 
     const navigation = useNavigation();
-    const [isThumbsUp, setIsThumbsUp] = React.useState(null);
+    const [isUpvoted, setIsUpvoted] = React.useState(null);
     const [iconStyle, setIconStyle] = React.useState(null);
 
     const iconColor = color(theme.colors.onSurface)
@@ -129,19 +129,17 @@ import { useNavigation } from '@react-navigation/native';
                     {/* </TouchableOpacity> */}
 
                     <TouchableOpacity
-                        onPress={() => {setIconStyle('solid'); console.log(isThumbsUp); }}
+                        onPress={() => {isUpvoted === false ? setIsUpvoted(null) : setIsUpvoted(false); console.log(isUpvoted); }}
                         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20  }}
                     >
                     <View style={styles.iconContainer}>
-                        {/* <MaterialCommunityIcons
-                        name="share-outline"
-                        size={14}
-                        color={iconColor}
-                        /> */}
-
-                        {/* <FontAwesomeIcon icon={faThumbsDown} style={styles.thumbsDown}  />   */}
-                        {/* <FontAwesomeIcon icon={regular("thumbs-down")} /> */}
-                        <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} /> 
+                        {/* <FontAwesomeIcon size={30}  style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} />  */}
+                        <FontAwesomeIcon 
+                            icon={[isUpvoted === null ? 'far' : isUpvoted ? 'far' : 'fas', "thumbs-down" ]}  
+                            
+                            style={styles.icon(theme)} 
+                            size={30}
+                        />
 
                         <Caption style={styles.iconDescription}>
                         {props.retweets} 1235
@@ -149,18 +147,16 @@ import { useNavigation } from '@react-navigation/native';
                     </View>
                     </TouchableOpacity>
                     <TouchableOpacity
-                    onPress={() => {alert('toggle thumbs up')}}
+                    onPress={() => { isUpvoted === true ? setIsUpvoted(null) : setIsUpvoted(true) }}
                     hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                     >
                     <View style={styles.iconContainer}>
-                        {/* <MaterialCommunityIcons
-                        name="heart-outline"
-                        size={12}
-                        color={iconColor}
-                        /> */}
-                        {/* <FontAwesomeIcon icon={faThumbsUp} size={12} color={iconColor} 
-                        /> */}
-                        <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
+
+                        {/* <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} />  */}
+                        <FontAwesomeIcon icon={[
+                            isUpvoted === null ? 'far' : isUpvoted ? 'fas' : 'far'
+                            , "thumbs-up" ]}  border  style={styles.icon(theme)} size={30} />
+
                         <Caption style={styles.iconDescription}>{props.hearts}
                         12312
                         </Caption>
