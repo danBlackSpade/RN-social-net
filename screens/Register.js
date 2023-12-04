@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { AuthContext } from '../contexts/AuthContext';
+import { API_URL } from '../config/constants';
 
 export const Register = ({ navigation }) => {
     const theme = useTheme();
@@ -39,7 +40,7 @@ export const Register = ({ navigation }) => {
     }, []);
     
     async function sendRegister(navigation) {
-        let response = await fetch('http://192.168.1.130:3000/register', {
+        let response = await fetch(`${API_URL}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

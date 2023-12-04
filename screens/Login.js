@@ -9,7 +9,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import Background from '../components/Background';
 import Header from '../components/Header';
 import Button from '../components/Button';
-
+import { API_URL } from '../config/constants';
 
 export const Login = ({ navigation }) => {
     const theme = useTheme();
@@ -33,8 +33,9 @@ export const Login = ({ navigation }) => {
     };
 
     async function sendLogin(navigation) {
-    
-        let response = await fetch('http://192.168.1.130:3000/login', {
+        console.log(`API URL  + ${API_URL}`);
+        let response = await fetch(`${API_URL}/login`, {
+            
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
