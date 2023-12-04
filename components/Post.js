@@ -141,7 +141,7 @@ import { useNavigation } from '@react-navigation/native';
 
                         {/* <FontAwesomeIcon icon={faThumbsDown} style={styles.thumbsDown}  />   */}
                         {/* <FontAwesomeIcon icon={regular("thumbs-down")} /> */}
-                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} /> 
+                        <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} /> 
 
                         <Caption style={styles.iconDescription}>
                         {props.retweets} 1235
@@ -160,7 +160,7 @@ import { useNavigation } from '@react-navigation/native';
                         /> */}
                         {/* <FontAwesomeIcon icon={faThumbsUp} size={12} color={iconColor} 
                         /> */}
-                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
+                        <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} /> 
                         <Caption style={styles.iconDescription}>{props.hearts}
                         12312
                         </Caption>
@@ -223,7 +223,6 @@ import { useNavigation } from '@react-navigation/native';
     }),
     icon: (theme) => ({
         color: theme.colors.secondary,
-        style: 'solid',
     })
 
 });

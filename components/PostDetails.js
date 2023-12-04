@@ -16,11 +16,11 @@ import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-
 export const PostDetails = (props) => {
     const theme = useTheme();
     const navigation = useNavigation();
-
+    const [statusThumb, setStatusThumb] = React.useState('far');
+    const [isUpvoted, setIsUpvoted] = React.useState(null);
 
     const contentColor = color(theme.colors.onSurface)
         .alpha(0.8)
@@ -76,16 +76,26 @@ export const PostDetails = (props) => {
                 ]}
             />
             <View style={styles.bottomRow}>
-                <TouchableOpacity onPress={() => {alert('downvote')}}>
+                <TouchableOpacity onPress={() => { isUpvoted === false ? setIsUpvoted(null) : setIsUpvoted(false)}}>
                     <View style={styles.iconContainer}>
-                        <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-down', style: 'regular'  })} />
+                        {/* <FontAwesomeIcon style={styles.icon(theme)} size={70} icon={icon({name: 'thumbs-down', style: 'regular'  })} /> */}
+                        <FontAwesomeIcon 
+                            icon={[isUpvoted === null ? 'far' : isUpvoted ? 'far' : 'fas', "thumbs-down" ]}  
+                            border  
+                            flip="vertical"  
+                            style={styles.icon(theme)} 
+                            size={70}
+                        />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {alert('upvote')}}>
+                <TouchableOpacity onPress={() => { isUpvoted === true ? setIsUpvoted(null) : setIsUpvoted(true)}}>
                     <View style={styles.iconContainer}>
-                        <FontAwesomeIcon size={70} icon={icon({name: 'thumbs-up', style: 'regular' })} />
+                        {/* <FontAwesomeIcon class="fa-beat" style={styles.icon(theme)} size={70} icon={icon({name: 'thumbs-up' })}  /> */}
+                        <FontAwesomeIcon icon={[
+                            isUpvoted === null ? 'far' : isUpvoted ? 'fas' : 'far'
+                            , "thumbs-up" ]}  border  flip="vertical"  style={styles.icon(theme)} size={70} />
                     </View>
-                    </TouchableOpacity>
+                </TouchableOpacity>
             </View>
         </Surface>
             
@@ -136,5 +146,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // justifyContent: 'flex-end'
     },
-
+    icon: (theme) => ({
+        color: theme.colors.primary,
+        // fontWeight: '900',
+               // borderRadius: 10,
+    }),
 })
