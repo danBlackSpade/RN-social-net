@@ -16,13 +16,13 @@ const Post = () => {
 
     const [title, onChangeTitle] = React.useState('');
     const [content, onChangeContent] = React.useState('');
-    const [isPrivate, setIsPrivate] = React.useState(null);
+    const [isPublic, setIsPublic] = React.useState(null);
 
-    // sendPost - title, body, isPrivate
+    // sendPost - title, body, isPublic
     // async function sendPost(navigation) { }
 
     async function createPost() {
-        let response = await fetch(`${API_URL}/create-post`, {
+        await fetch(`${API_URL}/posts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,19 +30,41 @@ const Post = () => {
             body: JSON.stringify({
                 title: title,
                 content: content,
-                isPrivate: isPrivate,
+                isPublic: isPublic,
             })
-            
-        });
-
-        let json = await response.json();
-        if (json === 'error') {
-            console.log('error');
-        } else {
-            console.log('creating.. '  + JSON.stringify(json));
-        }
+        })
+        .then( async (response) => {
+            let data = await response;
+            console.log(JSON.stringify(data));
+            if (data.status === 201) {
+                console.log('Post created');
+            } else {
+                console.log('error');
+                console.log(JSON.stringify(data));
+            }
+        })
 
     }
+    // async function createPost() {
+    //     let response = await fetch(`${API_URL}/create-post`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             title: title,
+    //             content: content,
+    //             isPublic: isPublic,
+    //         })
+    //     });
+    //     let json = await response.json();
+    //     if (json === 'error') {
+    //         console.log('error');
+    //     } else {
+    //         console.log('creating.. '  + JSON.stringify(json));
+    //     }
+
+    // }
 
     return (
         <View
@@ -82,8 +104,8 @@ const Post = () => {
                     <Text style={{ color: theme.colors.onBackground, alignSelf: 'center', fontWeight: 'bold' }} >Modo: </Text>
                     <Pressable style={ 
                         ({pressed}) => [{
-                            backgroundColor: isPrivate ? theme.colors.tertiary : theme.colors.secondary,
-                            opacity: isPrivate ? 1 : 0.5,
+                            backgroundColor: isPublic ? theme.colors.tertiary : theme.colors.secondary,
+                            opacity: isPublic ? 1 : 0.5,
                             width: '30%',
                             marginVertical: 0,
                             borderRadius: 10,
@@ -94,20 +116,20 @@ const Post = () => {
                         }]
                     } 
                         onPress={() => {
-                            setIsPrivate(true);
-                            console.log(isPrivate);
+                            setIsPublic(true)
+                            console.log(isPublic);
                         }}
                     >
                         <Text style={{
                                     fontSize: 12,
                                     fontWeight: 'bold',
                                     color: theme.colors.onPrimary,
-                        }}>Privado</Text>
+                        }}>Público</Text>
                     </Pressable>
                     <Pressable style={ 
                         ({pressed}) => [{
-                            backgroundColor: !isPrivate ? theme.colors.tertiary : theme.colors.secondary,
-                            opacity: !isPrivate ? 1 : 0.5,
+                            backgroundColor: !isPublic ? theme.colors.tertiary : theme.colors.secondary,
+                            opacity: !isPublic ? 1 : 0.5,
                             width: '30%',
                             marginVertical: 0,
                             borderRadius: 10,
@@ -119,15 +141,15 @@ const Post = () => {
                         }]
                     } 
                         onPress={() => {
-                            setIsPrivate(false);
-                            console.log(isPrivate);
+                            setIsPublic(false);
+                            console.log(isPublic);
                         }}
                     >
                         <Text style={{
                                     fontSize: 12,
                                     fontWeight: 'bold',
                                     color: theme.colors.onPrimary,
-                        }}>Público</Text>
+                        }}>Privado</Text>
                     </Pressable>
 
                 </View>
