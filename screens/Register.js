@@ -68,6 +68,58 @@ export const Register = ({ navigation }) => {
         }
     }
 
+    async function sendRegister2(navigation) {
+        console.log('sendRegister2'); 
+        await fetch(`${API_URL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify({ 
+                name: name,
+                email: email, 
+                password: password, 
+                username: username, 
+            }),
+        }).then( async (response) => {
+
+            let data = await response;
+            if (data.status === 500 || data.status === 400 ) {
+                console.log('error');
+                console.log(JSON.stringify(data));
+            } else {
+                console.log('register success');
+                // await AsyncStorage.setItem('userData', JSON.stringify(data));
+                // let resData = await AsyncStorage.getItem('userData');
+                // data = JSON.parse(resData);
+                // setCurrentUser({'username': data.username, 'email': data.email, 'name': data.name, 'isLoggedIn': true});
+                // console.log('User registered successfully : ' + data.email);
+                // navigation.navigate('Feed');
+            }
+        }).catch((error) => {
+            console.log('Error: ' + JSON.stringify(error));
+        });
+        
+    
+        // });
+        // let data = await response.json();
+        // if (data.status === 500 || data.status === 400) { 
+        //     console.log(json);
+        // } else {
+        //     console.log('register success');
+        //     console.log(data);
+        //     // await AsyncStorage.setItem('userData', JSON.stringify(json));
+        //     // let resData = await AsyncStorage.getItem('userData');
+        //     // json = JSON.parse(resData);
+        //     // setCurrentUser({'username': json.username, 'email': json.email, 'name': json.name, 'isLoggedIn': true});
+        //     // console.log('User registered successfully : ' + json.email);
+        //     // navigation.navigate('Feed');
+        // }
+
+
+    }
+
         return (
             <View style={{
                 flex: 1,
@@ -124,7 +176,7 @@ export const Register = ({ navigation }) => {
                 />
 
                 <Button
-                    onPress={() => sendRegister(navigation) }
+                    onPress={() => sendRegister2(navigation) }
                     style={{ marginTop: 24 }}
                 >
                 REGISTRAR    
