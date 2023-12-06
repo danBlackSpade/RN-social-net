@@ -18,6 +18,7 @@ import {
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StackNavigator } from './Stack';
@@ -52,6 +53,15 @@ export function DrawerContent({ props, navigation }) {
     //     inputRange: [0, 0.5, 0.7, 0.8, 1],
     //     outputRange: [-100, -85, -70, -45, 0],
     // });
+
+    function handleLogout() {
+        console.log('handleLogout')
+        setCurrentUser(null);
+        AsyncStorage.removeItem('userData');
+        console.log(currentUser);
+    }
+
+    console.log('drawer currentUser' + JSON.stringify(currentUser))
     return (
         <DrawerContentScrollView {...props}  style={{flex: 1, backgroundColor: paperTheme.colors.surfaceVariant}} >
             <View
@@ -93,8 +103,6 @@ export function DrawerContent({ props, navigation }) {
                             </View>
                         </View>
                         <Drawer.Section style={styles.drawerSection}>
-        
-                            {/* create if currentUser,loggedIn */}
                             
                                 <DrawerItem
                                     icon={({ color, size }) => (
@@ -115,6 +123,13 @@ export function DrawerContent({ props, navigation }) {
                                 )}
                                 label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
                                 onPress={() => { navigation.navigate('Friends'); }}
+                            />
+                            <DrawerItem
+                                icon={({ color, size }) => (
+                                    <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
+                                )}
+                                label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Logout</Text>) }
+                                onPress={handleLogout}
                             />
                             </Drawer.Section >
                         </View>

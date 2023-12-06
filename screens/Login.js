@@ -54,7 +54,6 @@ export const Login = ({ navigation }) => {
                 username: json.username,
                 name: json.name,
                 _id: json._id,
-            
             });
             await AsyncStorage.setItem('userData', stringifiedJson);
             let resData = await AsyncStorage.getItem('userData');
@@ -104,7 +103,7 @@ export const Login = ({ navigation }) => {
                 <View>
                     <Text style={styles.login_msg_error(visible)}>Usuário ou senha inválidos!</Text>
                 </View>
-                <TouchableOpacity onPress={console.log(' user HERE: ' + currentUser.email)}>
+                <TouchableOpacity >
                     <Text>Forgot Password? TEST</Text>
                 </TouchableOpacity>
                 {/* <TouchableOpacity onPress={login} style={{backgroundColor:'green', height:50, width: 150}}>

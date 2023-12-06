@@ -14,10 +14,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faThumbsUp, faThumbsDown, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faThumbsDown, faCheckSquare, faCoffee, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faCheckSquare, faCoffee, faThumbsUp, faThumbsDown, farThumbsUp, farThumbsDown)
+library.add(faCheckSquare, faCoffee, faThumbsUp, faThumbsDown, farThumbsUp, farThumbsDown, faRightFromBracket)
 // 
 
 
