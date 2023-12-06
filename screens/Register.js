@@ -24,6 +24,7 @@ export const Register = ({ navigation }) => {
     const [isKeyboardVisible, setKeyboardVisible] = React.useState(false);
     const [headerVisible, setHeaderVisible] = React.useState('flex');
     const { currentUser, setCurrentUser } = React.useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = React.useState('');
 
     React.useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { setKeyboardVisible(true); setHeaderVisible('none');  });
@@ -124,9 +125,14 @@ export const Register = ({ navigation }) => {
         let data = await response;
         if(data.status === 500 || data.status === 400){
             let msg = await data.json();
+            setErrorMessage(msg.message);
             console.log('error');
-            console.log(msg);
+            console.log(msg.message);
             console.log(data.status)
+            setVisible('flex');
+            setTimeout(() => {
+                setVisible('none');
+            }, 10000);
         } else {
             console.log(data);
             console.log('register success');
@@ -196,6 +202,10 @@ export const Register = ({ navigation }) => {
                     secureTextEntry
                 />
 
+                <View>
+                    <Text style={styles.login_msg_error(visible)}>{errorMessage}</Text>
+                </View>
+
                 <Button
                     onPress={() => sendRegister2(navigation) }
                     style={{ marginTop: 24 }}
@@ -220,7 +230,14 @@ const styles = StyleSheet.create({
     header: (text="flex") => ({
         display: text,
     }),
-
+    login_msg_error: (text='none') => ({
+        color: 'red',
+        display: text,
+        fontWeight: 'bold',
+        margin: 5,
+        fontSize: 15,
+    }),
     
 
 });
+
