@@ -26,10 +26,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import { faRightToBracket, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 
-
-
-
-
 // components
 
 
@@ -68,79 +64,79 @@ export function DrawerContent({ props, navigation }) {
                 //     },
                 //     ]}
             >
-                <View style={styles.userInfoSection}>
-                    <Avatar.Image 
-                        source={{
-                            uri: 'https://i.pravatar.cc/100?u=john',
-                        }}
-                        size={50}
-                    />
-                    <Title style={styles.title}>Douglas Silva</Title>
-                    <Caption style={styles.caption}>@trendsit2023</Caption>
-                    <View style={styles.row}>
-                        <View style={styles.section}>
-                            <Paragraph style={[styles.paragraph, styles.caption]}>
-                                202
-                            </Paragraph>
-                            <Caption style={styles.caption}>Gostei</Caption>
-                        </View>
-                        <View style={styles.section}>
-                            <Paragraph style={[styles.paragraph, styles.caption]}>
-                                159
-                            </Paragraph>
-                            <Caption style={styles.caption}>Amigos</Caption>
-                        </View>
-                    </View>
-                </View>
-                <Drawer.Section style={styles.drawerSection}>
-
-                    {/* create if currentUser,loggedIn */}
-                    { currentUser.isLogged
-                    ? (
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                            <MaterialCommunityIcons
-                                name="account-outline"
-                                color={paperTheme.colors.secondary}
-                                size={size}
+                {/* TODO: Check if user  */}
+                {
+                    currentUser.isLogged ? (
+                        <View>
+                            <View style={styles.userInfoSection}>
+                            <Avatar.Image 
+                                source={{
+                                    uri: 'https://i.pravatar.cc/100?u=john',
+                                }}
+                                size={50}
                             />
-                            )}
-                            label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
-                            onPress={() => {}}
-                        />
+                            <Title style={styles.title}>Douglas Silva</Title>
+                            <Caption style={styles.caption}>@trendsit2023</Caption>
+                            <View style={styles.row}>
+                                <View style={styles.section}>
+                                    <Paragraph style={[styles.paragraph, styles.caption]}>
+                                        202
+                                    </Paragraph>
+                                    <Caption style={styles.caption}>Gostei</Caption>
+                                </View>
+                                <View style={styles.section}>
+                                    <Paragraph style={[styles.paragraph, styles.caption]}>
+                                        159
+                                    </Paragraph>
+                                    <Caption style={styles.caption}>Amigos</Caption>
+                                </View>
+                            </View>
+                        </View>
+                        <Drawer.Section style={styles.drawerSection}>
+        
+                            {/* create if currentUser,loggedIn */}
+                            
+                                <DrawerItem
+                                    icon={({ color, size }) => (
+                                    <MaterialCommunityIcons
+                                        name="account-outline"
+                                        color={paperTheme.colors.secondary}
+                                        size={size}
+                                    />
+                                    )}
+                                    label={() => (<Text style={{color: paperTheme.colors.secondary}}>Profile</Text>)}
+                                    onPress={() => {}}
+                                />
+                            
+
+                            <DrawerItem
+                                icon={({ color, size }) => (
+                                    <FontAwesomeIcon icon={faUserGroup} size={size} color={paperTheme.colors.secondary} />
+                                )}
+                                label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
+                                onPress={() => { navigation.navigate('Friends'); }}
+                            />
+                            </Drawer.Section >
+                        </View>
                     )
                     : (
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                        // <MaterialCommunityIcons
-                        //     name="login"
-                        //     color={paperTheme.colors.secondary}
-                        //     size={size}
-                        // />
-                        <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
-                        )}
-                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
-                        onPress={() => { navigation.navigate('Login'); }}
-                    />
+                        <View>
+                            <DrawerItem
+                                icon={({ color, size }) => (
+                                // <MaterialCommunityIcons
+                                //     name="login"
+                                //     color={paperTheme.colors.secondary}
+                                //     size={size}
+                                // />
+                                <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
+                                )}
+                                label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
+                                onPress={() => { navigation.navigate('Login'); }}
+                            />
+                        </View>
                     )
-                    }
-
-
-                    {/* <DrawerItem
-                        icon={({ color, size }) => (
-                        <MaterialCommunityIcons name="tune" color={paperTheme.colors.secondary} size={size} />
-                        )}
-                        label={() => (<Text style={{color: paperTheme.colors.secondary}}>Preferences</Text>)}
-                        onPress={() => {}}
-                    /> */}
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <FontAwesomeIcon icon={faUserGroup} size={size} color={paperTheme.colors.secondary} />
-                        )}
-                        label={ () => (<Text style={{color: paperTheme.colors.secondary}}>Amigos</Text>) }
-                        onPress={() => { navigation.navigate('Friends'); }}
-                    />
-                    </Drawer.Section >
+                }
+        
                     <Drawer.Section  style={styles.preferences}>
                     <Title style={styles.preferences}>Preferências</Title>
                     
