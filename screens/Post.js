@@ -36,7 +36,7 @@ const Post = () => {
         .then( async (response) => {
             let data = await response;
             console.log(JSON.stringify(data));
-            if (data.status === 201) {
+            if (data.status === 201 || data.status === 200) {
                 console.log('Post created');
             } else {
                 console.log('error');
