@@ -71,7 +71,7 @@ export function DrawerContent({ props, navigation }) {
                 <View style={styles.userInfoSection}>
                     <Avatar.Image 
                         source={{
-                            uri: 'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+                            uri: 'https://i.pravatar.cc/100?u=john',
                         }}
                         size={50}
                     />

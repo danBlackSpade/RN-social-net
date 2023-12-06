@@ -34,7 +34,7 @@ export const Login = ({ navigation }) => {
 
     async function sendLogin(navigation) {
         console.log(`API URL  + ${API_URL}`);
-        let response = await fetch(`${API_URL}/login`, {
+        let response = await fetch(`${API_URL}/users/login`, {
             
             method: 'POST',
             headers: {
@@ -42,29 +42,40 @@ export const Login = ({ navigation }) => {
             },
             body: JSON.stringify({ email: email, password: password }),
         });
-        let json = await response.json();
-        
-        if (json === 'error') {
+        let data = await response;
+        console.log(data.status)
+        if (data.status  === 200) {
+            let json = await data.json();
+            console.log('loggin in .. . . .');
+            console.log('user ID: ' + json._id + ' ' + json.username);
+            console.log(json);
+            let stringifiedJson = JSON.stringify({
+                email: json.email,
+                username: json.username,
+                name: json.name,
+                _id: json._id,
+            
+            });
+            await AsyncStorage.setItem('userData', stringifiedJson);
+            let resData = await AsyncStorage.getItem('userData');
+            let userDataJson = JSON.parse(resData);
+            await setCurrentUser({ 
+                email: userDataJson.email,
+                username: userDataJson.username,
+                name: userDataJson.name,
+                isLogged: true,
+                id: userDataJson._id,
+            });
+            console.log('Logged In! EMAIL:::: ' + currentUser.email);
+            navigation.navigate('Feed');
+        } else {
+            console.log(json);
             console.log('Incorrect email or password');
             setVisible('flex');
             setTimeout(() => {
                 setVisible('none');
-
             }, 10000);
-        } else {
-            await AsyncStorage.setItem('userData', JSON.stringify(json));
-            let resData = await AsyncStorage.getItem('userData');
-            json = JSON.parse(resData);
-            await setCurrentUser({ 
-                email: json.email,
-                username: json.username,
-                name: json.name,
-                isLogged: true,
-            });
-            console.log('Logged In! EMAIL:::: ' + currentUser.email);
-            navigation.navigate('Feed');
         }
-
     }
 
     return (

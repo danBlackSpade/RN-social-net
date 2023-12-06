@@ -143,7 +143,6 @@ export const Register = ({ navigation }) => {
             console.log('User registered successfully : ' + data.email);
             navigation.navigate('Feed');
         }
-        
     }
     
 
@@ -234,7 +233,7 @@ const styles = StyleSheet.create({
         color: 'red',
         display: text,
         fontWeight: 'bold',
-        margin: 5,
+        margin: 0,
         fontSize: 15,
     }),
     
