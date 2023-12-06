@@ -64,7 +64,7 @@ export const Login = ({ navigation }) => {
                 username: userDataJson.username,
                 name: userDataJson.name,
                 isLogged: true,
-                id: userDataJson._id,
+                _id: userDataJson._id,
             });
             console.log('Logged In! EMAIL:::: ' + currentUser.email);
             navigation.navigate('Feed');
