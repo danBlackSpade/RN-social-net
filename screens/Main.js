@@ -20,9 +20,6 @@ import { faThumbsUp as farThumbsUp, faThumbsDown as farThumbsDown,  } from '@for
 library.add(faCheckSquare, faCoffee, faThumbsUp, faThumbsDown, farThumbsUp, farThumbsDown, faRightFromBracket, faRightToBracket, faArrowRightToBracket, faRankingStar)
 // 
 
-
-
-
 export const Main = () => {
 
     React.useEffect(() => {
@@ -58,15 +55,17 @@ export const Main = () => {
 
 
 
-    const [currentUser, setCurrentUser] = React.useState({'username': null, 'email': null, 'isLogged': false });
+    const [currentUser, setCurrentUser] = React.useState({'username': null, 'email': null, 'isLoggedIn': false });
     async function checkUser() {
         try {
             const value = await AsyncStorage.getItem('userData');
             if (value !== null) {
-                setCurrentUser(JSON.parse(value));
+                let dataJson = JSON.parse(value);
+                // setCurrentUser(JSON.parse(value));
+                setCurrentUser({ 'username': dataJson.username, 'email': dataJson.email, 'isLoggedIn': true, _id: dataJson._id });
                 return currentUser;
             } else {
-                setCurrentUser({ 'username': null, 'email': null, 'isLogged': false });
+                setCurrentUser({ 'username': null, 'email': null, 'isLoggedIn': false, _id: null });
                 console.log('no user');
                 return null;
             }

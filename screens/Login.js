@@ -54,6 +54,7 @@ export const Login = ({ navigation }) => {
                 username: json.username,
                 name: json.name,
                 _id: json._id,
+                isLoggedIn: true,
             });
             await AsyncStorage.setItem('userData', stringifiedJson);
             let resData = await AsyncStorage.getItem('userData');
@@ -62,7 +63,7 @@ export const Login = ({ navigation }) => {
                 email: userDataJson.email,
                 username: userDataJson.username,
                 name: userDataJson.name,
-                isLogged: true,
+                isLoggedIn: true,
                 _id: userDataJson._id,
             });
             console.log('Logged In! EMAIL:::: ' + currentUser.email);
@@ -76,6 +77,8 @@ export const Login = ({ navigation }) => {
             }, 10000);
         }
     }
+
+    // TODO - only show if user not logged in
 
     return (
         <Background>

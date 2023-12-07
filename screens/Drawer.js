@@ -56,12 +56,14 @@ export function DrawerContent({ props, navigation }) {
 
     function handleLogout() {
         console.log('handleLogout')
-        setCurrentUser(null);
+        setCurrentUser({'username': null, 'email': null, 'isLoggedIn': false, _id: null, name: null });
         AsyncStorage.removeItem('userData');
         console.log(currentUser);
     }
 
-    console.log('drawer currentUser' + JSON.stringify(currentUser))
+    console.log('drawer currentUser' + JSON.stringify(currentUser));
+    async  () => console.log(await AsyncStorage.getItem('userData')) ;
+
     return (
         <DrawerContentScrollView {...props}  style={{flex: 1, backgroundColor: paperTheme.colors.surfaceVariant}} >
             <View
@@ -76,7 +78,7 @@ export function DrawerContent({ props, navigation }) {
             >
                 {/* TODO: Check if user  */}
                 {
-                    currentUser.isLogged ? (
+                    currentUser.isLoggedIn ? (
                         <View>
                             <View style={styles.userInfoSection}>
                             <Avatar.Image 

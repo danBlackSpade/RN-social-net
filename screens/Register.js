@@ -54,58 +54,29 @@ export const Register = ({ navigation }) => {
             }),
         });
         let json = await response.json();
+        let stringifiedJson = JSON.stringify({
+            email: json.email,
+            username: json.username,
+            name: json.name,
+            _id: json._id,
+            isLoggedIn: true,
+        });
+
         if (json === 'error') {
             setVisible('flex');
             setTimeout(() => {
                 setVisible('none');
             }, 10000);
         } else {
-            await AsyncStorage.setItem('userData', JSON.stringify(json));
+            await AsyncStorage.setItem('userData', stringifiedJson);
             let resData = await AsyncStorage.getItem('userData');
             json = JSON.parse(resData);
-            setCurrentUser({'username': json.username, 'email': json.email, 'name': json.name, 'isLoggedIn': true});
+            // setCurrentUser({'username': json.username, 'email': json.email, 'name': json.name, 'isLoggedIn': true, _id: json._id});
             console.log('User registered successfully : ' + json.email);
             navigation.navigate('Feed');
         }
     }
 
-    // async function sendRegister2(navigation) {
-    //     console.log('sendRegister2'); 
-    //     await fetch(`${API_URL}/users`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-
-    //         },
-    //         body: JSON.stringify({ 
-    //             name: name,
-    //             email: email, 
-    //             password: password, 
-    //             username: username, 
-    //         }),
-    //     }).then(async (response) => {
-
-    //         let data = await response;
-    //         if (data.status === 500 || data.status === 400 ) {
-    //             console.log('error');
-    //             console.log(JSON.stringify(data));
-    //         } else {
-    //             console.log('register success');
-    //             await AsyncStorage.setItem('userData', JSON.stringify(data));
-    //             let resData = await AsyncStorage.getItem('userData');
-    //             data = JSON.parse(resData);
-    //             setCurrentUser({'username': data.username, 'email': data.email, 'name': data.name, 'isLoggedIn': true});
-    //             console.log('User registered successfully : ' + data.email);
-    //             navigation.navigate('Feed');
-    //         }
-    //     }).catch((error) => {
-    //         console.log('Error: ' + error + JSON.stringify(error));
-    //     });
-        
-    
-    
-
-    // }
     async function sendRegister2(navigation) {
         console.log('sendRegister2'); 
         let response = await fetch(`${API_URL}/users`, {
@@ -121,8 +92,8 @@ export const Register = ({ navigation }) => {
                 username: username, 
             }),
         });
-
         let data = await response;
+        console.log('data : ' + data);
         if(data.status === 500 || data.status === 400){
             let msg = await data.json();
             setErrorMessage(msg.message);
@@ -134,13 +105,22 @@ export const Register = ({ navigation }) => {
                 setVisible('none');
             }, 10000);
         } else {
-            console.log(data);
+            let json = await response.json();
+            let stringifiedJson = JSON.stringify({
+                email: json.email,
+                username: json.username,
+                name: json.name,
+                _id: json._id,
+                isLoggedIn: true,
+            });
+            console.log(json);
             console.log('register success');
-            await AsyncStorage.setItem('userData', JSON.stringify(data));
+            await AsyncStorage.setItem('userData', stringifiedJson);
             let resData = await AsyncStorage.getItem('userData');
-            data = JSON.parse(resData);
-            setCurrentUser({'username': data.username, 'email': data.email, 'name': data.name, 'isLoggedIn': true});
-            console.log('User registered successfully : ' + data.email);
+            console.log(resData)
+            let storageData = JSON.parse(resData);
+            setCurrentUser(storageData);
+            console.log('User registered successfully : ' + storageData.email);
             navigation.navigate('Feed');
         }
     }

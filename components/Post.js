@@ -108,35 +108,33 @@ import { useNavigation } from '@react-navigation/native';
                         onPress={() => {isUpvoted === false ? setIsUpvoted(null) : setIsUpvoted(false); console.log(isUpvoted); }}
                         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20  }}
                     >
-                    <View style={styles.iconContainer}>
-                        {/* <FontAwesomeIcon size={30}  style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} />  */}
-                        <FontAwesomeIcon 
-                            icon={[isUpvoted === null ? 'far' : isUpvoted ? 'far' : 'fas', "thumbs-down" ]}  
-                            
-                            style={styles.icon(theme)} 
-                            size={30}
-                        />
+                        <View style={styles.iconContainer}>
+                            {/* <FontAwesomeIcon size={30}  style={styles.icon(theme)} icon={icon({ name: 'thumbs-down', style: 'regular' })} />  */}
+                            <FontAwesomeIcon 
+                                icon={[isUpvoted === null ? 'far' : isUpvoted ? 'far' : 'fas', "thumbs-down" ]}  
+                                
+                                style={styles.icon(theme)} 
+                                size={30}
+                            />
 
-                        <Caption style={styles.iconDescription}>
-                        {props.retweets} 
-                        1235
-                        </Caption>
-                    </View>
+                            <Caption style={styles.iconDescription}>
+                            {props.retweets} 
+                            1235
+                            </Caption>
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                     onPress={() => { isUpvoted === true ? setIsUpvoted(null) : setIsUpvoted(true) }}
                     hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                     >
-                    <View style={styles.iconContainer}>
+                        <View style={styles.iconContainer}>
+                            <FontAwesomeIcon icon={[
+                                isUpvoted === null ? 'far' : isUpvoted ? 'fas' : 'far'
+                                , "thumbs-up" ]}  border  style={styles.icon(theme)} size={30} />
 
-                        {/* <FontAwesomeIcon size={30} style={styles.icon(theme)} icon={icon({name: 'thumbs-up', style: 'regular'})} />  */}
-                        <FontAwesomeIcon icon={[
-                            isUpvoted === null ? 'far' : isUpvoted ? 'fas' : 'far'
-                            , "thumbs-up" ]}  border  style={styles.icon(theme)} size={30} />
-
-                        <Caption style={styles.iconDescription}>{props.hearts}
-                        12312
-                        </Caption>
+                            <Caption style={styles.iconDescription}>{props.hearts}
+                            12312
+                            </Caption>
                     </View>
                     </TouchableOpacity>
                 </View>
