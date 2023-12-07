@@ -96,37 +96,13 @@ import { useNavigation } from '@react-navigation/native';
                 />
                 
                 <View style={styles.bottomRow}>
-                    {/* <TouchableOpacity */}
-                    
-                    {/* hitSlop={{ top: 10, bottom: 10 }}
-                    > */}
                     <View style={styles.iconContainer}>
-                        {/* <MaterialCommunityIcons
-                        name="comment-outline"
-                        size={12}
-                        color={iconColor}
-                        /> */}
-                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'computer-mouse'})} />
-
-                        
+                        {/* <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'ranking-star', style: 'solid'})} />  */}
+                        <FontAwesomeIcon icon={['fas', "ranking-star"]} size={30} style={styles.icon(theme)}/> 
                         <Caption style={styles.iconDescription}>
-                        {props.comments} 1232
+                        555
                         </Caption>
                     </View>
-                    {/* </TouchableOpacity> */}
-
-                    {/* <TouchableOpacity
-                        
-                        hitSlop={{ top: 10, bottom: 10 }}
-                    > */}
-                    <View style={styles.iconContainer}>
-                        <FontAwesomeIcon style={styles.icon(theme)} icon={icon({name: 'ranking-star', style: 'solid'})} /> 
-
-                        <Caption style={styles.iconDescription}>
-                        {props.retweets} 555
-                        </Caption>
-                    </View>
-                    {/* </TouchableOpacity> */}
 
                     <TouchableOpacity
                         onPress={() => {isUpvoted === false ? setIsUpvoted(null) : setIsUpvoted(false); console.log(isUpvoted); }}
@@ -142,7 +118,8 @@ import { useNavigation } from '@react-navigation/native';
                         />
 
                         <Caption style={styles.iconDescription}>
-                        {props.retweets} 1235
+                        {props.retweets} 
+                        1235
                         </Caption>
                     </View>
                     </TouchableOpacity>
