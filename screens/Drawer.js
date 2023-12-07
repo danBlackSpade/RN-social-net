@@ -137,16 +137,39 @@ export function DrawerContent({ props, navigation }) {
                     : (
                         <View>
                             <DrawerItem
-                                icon={({ color, size }) => (
-                                // <MaterialCommunityIcons
-                                //     name="login"
-                                //     color={paperTheme.colors.secondary}
-                                //     size={size}
-                                // />
-                                <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
+                                // icon={({ color, size }) => (
+                                // // <MaterialCommunityIcons
+                                // //     name="login"
+                                // //     color={paperTheme.colors.secondary}
+                                // //     size={size}
+                                // // />
+                                // <FontAwesomeIcon icon={faRightToBracket} size={size} color={paperTheme.colors.secondary} />
+                                // )}
+                                // label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
+                                // onPress={() => { navigation.navigate('Login'); }}
+                                icon={( { color, size }) => (
+                                    <FontAwesomeIcon icon={[ 'fas', 'right-to-bracket' ]} size={size} color={paperTheme.colors.secondary} />
                                 )}
-                                label={() => (<Text style={{color: paperTheme.colors.secondary}}>Entre ou Cadastre-se</Text>)}
-                                onPress={() => { navigation.navigate('Login'); }}
+                                label={() => (
+                                    <Text style={{color: paperTheme.colors.secondary}}>Entrar</Text>
+                                )}
+                                onPress={() => {
+                                    navigation.navigate('Login');
+                                }}
+                                
+                            />
+                            <DrawerItem
+
+                                icon={( { color, size }) => (
+                                    <FontAwesomeIcon icon={[ 'fas', 'arrow-right-to-bracket' ]} size={size} color={paperTheme.colors.secondary} />
+                                )}
+                                label={() => (
+                                    <Text style={{color: paperTheme.colors.secondary}}>Registre-se</Text>
+                                )}
+                                onPress={() => {
+                                    navigation.navigate('Register');
+                                }}
+                                
                             />
                         </View>
                     )
